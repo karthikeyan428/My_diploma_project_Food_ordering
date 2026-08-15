@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuickBite - Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #ff5200, #ff7a1a, #ff9f43, #ff3c00);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+    /* ===== NAVBAR ===== */
+    .navbar{
+      background: linear-gradient(to right, #ff7a00, #ff9f43);
+      padding:15px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:white;
+    }
+
+    .logo{
+      font-size:24px;
+      font-weight:bold;
+    }
+
+    .nav-right button{
+      background:rgba(255,255,255,0.2);
+      border:none;
+      color:white;
+      padding:8px 14px;
+      margin-left:10px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .cart-badge{
+      background:red;
+      padding:2px 6px;
+      border-radius:50%;
+      font-size:12px;
+      margin-left:5px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+  background: linear-gradient(135deg, #ff5200, #ff7a1a);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft glowing circle effect */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  bottom: -120px;
+  right: -120px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+    .hero input{
+      width:50%;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:16px;
+    }
+
+    /* ===== FOOD SECTION ===== */
+    .section-title{
+    text-align:center;
+    font-size:40px;
+    font-weight:800;
+    color:white;
+    margin:50px 0 30px;
+    letter-spacing:1px;
+    position:relative;
+    }
+
+.section-title::after{
+  content:"";
+  width:80px;
+  height:4px;
+  background:white;
+  display:block;
+  margin:10px auto 0;
+  border-radius:10px;
+}
+
+    .container{
+  width:100%;
+}
+
+    .food-card{
+  width: 260px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+  transition: all 0.4s ease;
+  animation: floatIn 0.8s ease forwards;
+  opacity: 0;
+  animation: ultraFade 0.8s cubic-bezier(.17,.67,.83,.67) forwards;
+  animation-delay: calc(var(--i) * 0.15s);
+  transform: translateY(40px);
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.2s ease;
+}
+
+.food-card:hover{
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+.food-card {
+  width: 260px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: ultraFade 0.8s cubic-bezier(.17,.67,.83,.67) forwards;
+  animation-delay: calc(var(--i) * 0.15s);
+  transform: translateY(40px);
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Hover Lift */
+.food-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+/* Image Zoom */
+.food-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: 0.5s ease;
+}
+
+.food-card:hover img {
+  transform: scale(1.12);
+}
+
+/* Shine Effect */
+.food-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.2),
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.2)
+  );
+  transform: skewX(-25deg);
+  transition: 0.7s;
+}
+
+.food-card:hover::before {
+  left: 130%;
+}
+
+/* Glow Border */
+.food-card::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, #ff5200, #ff8c42, #ff5200);
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.food-card:hover::after {
+  opacity: 1;
+}
+
+/* Animation */
+@keyframes ultraFade{
+  0%{
+    opacity:0;
+    transform: translateY(50px) scale(0.9) rotateX(10deg);
+  }
+  60%{
+    opacity:1;
+    transform: translateY(-10px) scale(1.03);
+  }
+  100%{
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+    .food-details{
+      padding:15px;
+    }
+
+    .food-details h3{
+      margin:0 0 8px;
+    }
+
+    .price{
+      font-weight:bold;
+      margin-bottom:5px;
+    }
+
+    .rating{
+      color:green;
+      font-size:14px;
+      margin-bottom:10px;
+    }
+
+    .add-btn{
+  width:100%;
+  padding:10px;
+  background: linear-gradient(to right, #ff7a00, #ff9f43);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover{
+  transform: scale(1.05);
+  box-shadow:0 8px 20px rgba(255,122,0,0.4);
+}
+
+.add-btn:active{
+  transform: scale(0.95);
+}
+/* ===============================
+   ULTRA PREMIUM FOOTER
+================================= */
+
+.footer {
+  position: relative;
+  margin-top: 100px;
+  padding: 70px 20px 30px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  overflow: hidden;
+}
+
+/* Animated top border glow */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 3px;
+  background: linear-gradient(90deg,#ff5200,#ff9f43,#ff3c00,#ff5200);
+  animation: footerGlow 4s linear infinite;
+}
+
+@keyframes footerGlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-col h3,
+.footer-logo {
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Link animation */
+.footer-col p {
+  font-size: 14px;
+  margin: 10px 0;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-col p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg,#ff5200,#ff9f43);
+  transition: 0.4s;
+}
+
+.footer-col p:hover::after {
+  width: 100%;
+}
+
+.footer-col p:hover {
+  transform: translateX(5px);
+  color: #ffddc1;
+}
+
+
+/* Social icons */
+.social-icons span {
+  display: inline-block;
+  font-size: 22px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.social-icons span:hover {
+  transform: translateY(-5px) scale(1.2);
+  text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+/* App buttons */
+.app-btn {
+  width: 150px;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg,#ff5200,#ff9f43);
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.app-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,82,0,0.4);
+}
+
+/* Bottom section */
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.social-icons{
+  margin-top:15px;
+}
+
+.social-icons span{
+  font-size:20px;
+  margin-right:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.social-icons span:hover{
+  transform:scale(1.2);
+}
+
+.app-btn{
+  display:block;
+  margin-bottom:10px;
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:white;
+  color:#ff7a00;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.app-btn:hover{
+  background:black;
+  color:white;
+}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:40px;
+  border-top:1px solid rgba(255,255,255,0.3);
+  padding-top:15px;
+  font-size:14px;
+}/* ===== Toast Notification ===== */
+
+.toast{
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.toast.show{
+  opacity: 1;
+  bottom: 50px;
+}
+@keyframes fadeInUp {
+  from {
+    opacity:0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+.food-card{
+  animation: fadeInUp 0.6s ease forwards;
+}
+.search-box {
+  margin-top: 30px;
+}
+
+.search-box input {
+  width: 60%;
+  max-width: 600px;
+  padding: 15px 20px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.search-box input:focus {
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+.menu-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  margin: 50px 0 30px;
+  letter-spacing: 1px;
+}
+.menu-section {
+  background: #ff5200;
+  padding-bottom: 60px;
+}
+.wave svg {
+  display: block;
+  width: 100%;
+}
+.search-box input {
+  width: 60%;
+  max-width: 600px;
+  padding: 15px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.3);
+  outline: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  color: white;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.search-box input::placeholder {
+  color: rgba(255,255,255,0.8);
+}
+.floating-food span {
+  position: absolute;
+  font-size: 30px;
+  animation: floatUp 10s linear infinite;
+  opacity: 0.7;
+}
+
+.floating-food span:nth-child(1){ left:10%; animation-delay:0s;}
+.floating-food span:nth-child(2){ left:30%; animation-delay:2s;}
+.floating-food span:nth-child(3){ left:50%; animation-delay:4s;}
+.floating-food span:nth-child(4){ left:70%; animation-delay:6s;}
+.floating-food span:nth-child(5){ left:85%; animation-delay:8s;}
+
+@keyframes floatUp {
+  0% { bottom: -50px; transform: rotate(0deg);}
+  100% { bottom: 100%; transform: rotate(360deg);}
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, #ff5200, #ff8c42, #ff5200);
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+header {
+  background: linear-gradient(-45deg, #ff5200, #ff7a18, #ff3c00, #ff8c42);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease infinite;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+.logo span {
+  transition: 0.3s;
+}
+
+.logo:hover span {
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+@keyframes floatLogo {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+.foods-bg {
+  position: fixed;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(135deg, #ff8317, #fdcaa2, #ff8317);
+  z-index: -1;
+}
+.parallax-bg {
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  z-index: 1;
+}
+.image-wrapper {
+  position: relative;
+}
+
+.tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(to right, #ff3c00, #ff9f43);
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.time {
+  color: #555;
+  font-weight: 500;
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<div class="navbar">
+  <div class="logo">
+  🍔 <span>QuickBite</span>
+</div>
+ <div class="foods-bg"></div>
+
+  <div class="nav-right">
+    <button class="add-btn magnetic"onclick="goToCart()">
+      🛒 Cart <span class="cart-badge" id="cart-count">0</span>
+    </button>
+    <button  class="add-btn magnetic"onclick="window.location='index.html'">🏠 Home</button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>Explore Delicious Menu</h1>
+  <p>Fresh & tasty meals delivered fast 🚀</p>
+  <input type="text" id="search" placeholder="Search food..." onkeyup="filterFood()">
+</div>
+
+
+<h2 class="section-title">Our Special Dishes</h2>
+
+<div class="container" id="food-container"></div>
+ <div class="floating-food">
+  <span>🍕</span>
+  <span>🍔</span>
+  <span>🍟</span>
+  <span>🥗</span>
+  <span>🍩</span>
+</div>
+<script>
+const menuData = {
+
+  "Arabian Hut": [
+    {name:"Al Faham", price:250, rating:4.6, image:"/image/faham-chicken.jpg", time:"25 mins", tag:"Popular"},
+    {name:"Chicken Shawarma", price:120, rating:4.5, image:"/image/chicken-shawarma.jpg", time:"15 mins", tag:"Best Seller"},
+    {name:"Mutton Mandi", price:320, rating:4.7, image:"/image/mutton-mandi.jpg", time:"30 mins", tag:"Special"},
+    {name:"Grill Chicken", price:280, rating:4.4, image:"/image/grill-chicken.avif", time:"25 mins", tag:"Hot"},
+    {name:"Kuboos with Chicken Curry", price:180, rating:4.3, image:"/image/kuboos -with-chicken-curry.jpg", time:"20 mins", tag:""},
+    {name:"Falafel Plate", price:150, rating:4.2, image:"/image/falafel-plate.jpg", time:"15 mins", tag:"Veg"},
+    {name:"Chicken Kabsa", price:290, rating:4.5, image:"/image/chicken-kabsa.jpg", time:"30 mins", tag:"Chef Choice"},
+    {name:"Hummus & Pita", price:130, rating:4.1, image:"/image/hummus-pita.jpg", time:"10 mins", tag:"Starter"}
+  ],
+
+  "Tamil Nadu hotel": [
+    {name:"Full Meals", price:150, rating:4.5, image:"/image/full-meals.jpg", time:"20 mins", tag:"Popular"},
+    {name:"Chicken Curry Meals", price:220, rating:4.4, image:"/image/chicken-curry-meals.jpg", time:"25 mins", tag:"Best Seller"},
+    {name:"Mutton Curry", price:260, rating:4.6, image:"/image/mutton-curry.jpg", time:"30 mins", tag:"Special"},
+    {name:"Fish Fry", price:180, rating:4.3, image:"/image/fish-fry.jpg", time:"20 mins", tag:"Hot"},
+    {name:"Egg Curry", price:140, rating:4.2, image:"/image/egg-curry.jpg", time:"15 mins", tag:""},
+    {name:"Sambar Rice", price:100, rating:4.1, image:"/image/sambar-rice.jpg", time:"15 mins", tag:"Veg"},
+    {name:"Curd Rice", price:90, rating:4.0, image:"/image/curd-rice.jpg", time:"10 mins", tag:"Cooling"},
+    {name:"Parotta with Salna", price:120, rating:4.4, image:"/image/parotta-with-salna.jpg", time:"20 mins", tag:"Evening Special"}
+  ],
+
+"Hunger Brunch": [
+  {name:"Masala Dosa", price:110, rating:4.5, image:"/image/masala-dosa.jpg", time:"15 mins", tag:"Popular"},
+  {name:"Ghee Roast Dosa", price:130, rating:4.6, image:"/image/ghee-roast-dosa.jpg", time:"15 mins", tag:"Best Seller"},
+  {name:"Pongal", price:90, rating:4.4, image:"/image/pongal.jpg", time:"15 mins", tag:""},
+  {name:"Poori Masala", price:100, rating:4.3, image:"/image/poori-masala.jpg", time:"15 mins", tag:""},
+  {name:"Veg Sandwich", price:80, rating:4.2, image:"/image/veg-sandwich.jpg", time:"10 mins", tag:""},
+  {name:"French Fries", price:90, rating:4.3, image:"/image/french-fries.jpg", time:"10 mins", tag:""},
+  {name:"Cold Coffee", price:100, rating:4.4, image:"/image/cold-coffee.jpg", time:"5 mins", tag:"Drink"},
+  {name:"Brownie with Ice Cream", price:120, rating:4.6, image:"/image/brownie-with-ice-cream.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Shree saravana Bhavan": [
+  {name:"Mini Tiffin", price:150, rating:4.6, image:"/image/mini-tiffin.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Rava Dosa", price:110, rating:4.5, image:"/image/rava-dosa.jpg", time:"15 mins", tag:"Best Seller"},
+  {name:"Idli Sambar", price:60, rating:4.4, image:"/image/idli-sambar.jpg", time:"10 mins", tag:""},
+  {name:"Meals", price:180, rating:4.7, image:"/image/meals.jpg", time:"20 mins", tag:"Special"},
+  {name:"Chapathi Kurma", price:90, rating:4.2, image:"/image/chapathi-kurma.jpg", time:"15 mins", tag:""},
+  {name:"Curd Rice", price:80, rating:4.3, image:"/image/curd-rice.jpg", time:"10 mins", tag:""},
+  {name:"Filter Coffee", price:40, rating:4.6, image:"/image/filter-coffee.jpg", time:"5 mins", tag:"Drink"},
+  {name:"Kesari", price:60, rating:4.4, image:"/image/kesari.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Hotel Mangalam Non Veg": [
+{name:"Chicken Dum Biryani", price:220, rating:4.7, image:"image/chicken-dum-biryani.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Biryani", price:320, rating:4.8, image:"image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Chicken 65", price:190, rating:4.5, image:"image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Pepper Chicken", price:210, rating:4.5, image:"image/pepper-chicken.jpg", time:"20 mins", tag:""},
+{name:"Fish Fry", price:230, rating:4.4, image:"image/fish-fry.jpg", time:"25 mins", tag:""},
+{name:"Mutton Chukka", price:310, rating:4.7, image:"image/mutton-chukka.jpg", time:"30 mins", tag:"Special"},
+{name:"Parotta", price:20, rating:4.2, image:"image/parotta.jpg", time:"10 mins", tag:""},
+{name:"Raita", price:40, rating:4.0, image:"image/raita.jpg", time:"5 mins", tag:"Side"}
+],
+
+"Nagas Restaurant": [
+{name:"Butter Chicken", price:260, rating:4.5, image:"image/butter-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Paneer Butter Masala", price:220, rating:4.4, image:"image/paneer-butter-masala.jpg", time:"20 mins", tag:"Veg"},
+{name:"Chicken Fried Rice", price:180, rating:4.3, image:"image/chicken-fried-rice.jpg", time:"20 mins", tag:"Best Seller"},
+{name:"Mutton Gravy", price:320, rating:4.6, image:"image/mutton-gravy.jpg", time:"30 mins", tag:"Special"},
+{name:"Naan", price:40, rating:4.1, image:"image/naan.jpg", time:"10 mins", tag:""},
+{name:"Gobi Manchurian", price:160, rating:4.2, image:"image/gobi-manchurian.jpg", time:"15 mins", tag:"Starter"},
+{name:"Chicken Lollipop", price:190, rating:4.4, image:"image/chicken-lollipop.jpg", time:"20 mins", tag:"Hot"},
+{name:"Ice Cream Sundae", price:110, rating:4.3, image:"image/ice-cream-sundae.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Fudbay Restaurant": [
+{name:"Chicken Burger", price:140, rating:4.4, image:"image/chicken-burger.jpg", time:"15 mins", tag:"Popular"},
+{name:"Veg Burger", price:120, rating:4.2, image:"image/veg-burger.jpg", time:"15 mins", tag:""},
+{name:"Chicken Shawarma", price:130, rating:4.5, image:"image/chicken-shawarma.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Grilled Sandwich", price:110, rating:4.3, image:"image/grilled-sandwich.jpg", time:"10 mins", tag:""},
+{name:"French Fries", price:100, rating:4.1, image:"image/french-fries.jpg", time:"10 mins", tag:"Starter"},
+{name:"White Sauce Pasta", price:180, rating:4.4, image:"image/white-sauce-pasta.jpg", time:"20 mins", tag:""},
+{name:"Cold Coffee", price:120, rating:4.5, image:"image/cold-coffee.jpg", time:"5 mins", tag:"Drink"},
+{name:"Chocolate Milkshake", price:130, rating:4.6, image:"image/chocolate-milkshake.jpg", time:"8 mins", tag:"Dessert"}
+],
+
+"Grand Darbar - Multi Cuisine Restaurant":[
+{name:"Mutton Biryani", price:340, rating:4.8, image:"image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Chicken Dum Biryani", price:240, rating:4.7, image:"image/chicken-dum-biryani.jpg", time:"25 mins", tag:"Popular"},
+{name:"Butter Chicken", price:280, rating:4.6, image:"image/butter-chicken.jpg", time:"25 mins", tag:""},
+{name:"Mutton Kebab", price:320, rating:4.7, image:"image/mutton-kebab.jpg", time:"25 mins", tag:"Special"},
+{name:"Chicken 65", price:200, rating:4.5, image:"image/chicken-65.jpg", time:"20 mins", tag:""},
+{name:"Fish Fry", price:260, rating:4.4, image:"image/fish-fry.jpg", time:"20 mins", tag:""},
+{name:"Tandoori Roti", price:30, rating:4.2, image:"image/tandoori-roti.jpg", time:"10 mins", tag:"Side"},
+{name:"Gulab Jamun", price:90, rating:4.5, image:"image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"NAMMA KADAI": [
+{name:"Chicken Meals", price:190, rating:4.4, image:"image/chicken-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Mutton Curry kulambu and rice", price:170, rating:4.6, image:"image/mutton-curry-meals.jpg", time:"25 mins", tag:"Best Seller"},
+{name:"Egg Fried Rice", price:120, rating:4.2, image:"image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chicken Fry", price:100, rating:4.3, image:"image/chicken-fry.jpg", time:"20 mins", tag:""},
+{name:"Fish Curry kulambu and rice", price:150, rating:4.3, image:"image/fish-curry.jpg", time:"20 mins", tag:""},
+{name:"Parotta", price:20, rating:4.2, image:"image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Rasam", price:40, rating:4.1, image:"image/rasam.jpg", time:"5 mins", tag:"Side"},
+{name:"Payasam", price:70, rating:4.4, image:"image/payasam.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Sai Ananda Bhavan": [
+{name:"Idli Sambar", price:50, rating:4.5, image:"image/idli-sambar.jpg", time:"10 mins", tag:"Popular"},
+{name:"Masala Dosa", price:100, rating:4.6, image:"image/masala-dosa.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Poori Masala", price:90, rating:4.4, image:"image/poori-masala.jpg", time:"15 mins", tag:""},
+{name:"Mini Meals", price:130, rating:4.5, image:"image/veg-meals.jpg", time:"20 mins", tag:""},
+{name:"Curd Rice", price:70, rating:4.3, image:"image/curd-rice.jpg", time:"10 mins", tag:""},
+{name:"Lemon Rice", price:75, rating:4.2, image:"image/lemon-rice.jpg", time:"10 mins", tag:""},
+{name:"Filter Coffee", price:35, rating:4.6, image:"image/filter-coffee.jpg", time:"5 mins", tag:"Drink"},
+{name:"Kesari", price:60, rating:4.4, image:"image/kesari.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Virundhavan Millets Restaurant": [
+{name:"Kambu Dosa", price:110, rating:4.6, image:"image/millet-dosa.jpg", time:"15 mins", tag:"Popular"},
+{name:"Thinai Pongal", price:120, rating:4.7, image:"image/millet-pongal.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Ragi Idiyappam", price:100, rating:4.5, image:"image/ragi-idiyappam.jpg", time:"15 mins", tag:"Healthy"},
+{name:"Varagu Lemon Rice", price:130, rating:4.6, image:"image/lemon-rice.jpg", time:"20 mins", tag:"Special"},
+{name:"Samai Veg Meals", price:180, rating:4.8, image:"image/south-indian-veg-meals.jpg", time:"25 mins", tag:"Full Meals"},
+{name:"Ragi Mudde with Sambar", price:140, rating:4.4, image:"image/ragi-mudde.jpg", time:"20 mins", tag:"Traditional"},
+{name:"Millet Chapathi", price:90, rating:4.3, image:"image/millet-roti.jpg", time:"15 mins", tag:""},
+{name:"Palm Jaggery Sweet Pongal", price:95, rating:4.7, image:"image/sweet-pongal.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Kesava Tiffen Centre": [
+{name:"Idli (2 pcs)", price:40, rating:4.6, image:"image/idli-sambar.jpg", time:"10 mins", tag:"Popular"},
+{name:"Masala Dosa", price:80, rating:4.7, image:"image/masala-dosa.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Plain Dosa", price:60, rating:4.4, image:"image/plain-dosa.jpg", time:"12 mins", tag:""},
+{name:"Pongal", price:70, rating:4.5, image:"image/millet-pongal.jpg", time:"15 mins", tag:"Morning Special"},
+{name:"Poori Masala", price:75, rating:4.3, image:"image/poori-masala.jpg", time:"15 mins", tag:""},
+{name:"Vada (2 pcs)", price:35, rating:4.5, image:"image/medu-vada.jpg", time:"8 mins", tag:"Crispy"},
+{name:"Upma", price:55, rating:4.2, image:"image/upma.jpg", time:"10 mins", tag:""},
+{name:"Filter Coffee", price:25, rating:4.8, image:"image/filter-coffee.jpg", time:"5 mins", tag:"Hot Drink"}
+],
+
+"JK Dhaba Family Restaurant": [
+{name:"Tandoori Chicken", price:270, rating:4.6, image:"image/tandoori-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Chicken Tikka", price:240, rating:4.5, image:"image/chicken-tikka.jpg", time:"20 mins", tag:"Best Seller"},
+{name:"Paneer Tikka", price:220, rating:4.4, image:"image/paneer-tikka.jpg", time:"20 mins", tag:"Veg"},
+{name:"Butter Naan", price:45, rating:4.2, image:"image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken Biryani", price:210, rating:4.5, image:"image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Dal Makhani", price:180, rating:4.3, image:"image/dal-makhani.jpg", time:"20 mins", tag:""},
+{name:"Jeera Rice", price:130, rating:4.2, image:"image/jeera-rice.jpg", time:"15 mins", tag:""},
+{name:"Brownie", price:110, rating:4.6, image:"image/brownie.jpg", time:"10 mins", tag:"Dessert"}
+], 
+ 
+"RRR GUNTUR SPICES": [
+{name:"Chicken Dum Biryani", price:220, rating:4.7, image:"/image/chicken-dum-biryani.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Biryani", price:320, rating:4.8, image:"/image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Egg Biryani", price:170, rating:4.3, image:"/image/egg-biryani.jpg", time:"20 mins", tag:""},
+{name:"Kuska", price:120, rating:4.2, image:"/image/kuska.jpg", time:"15 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.5, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Grill Chicken", price:270, rating:4.6, image:"/image/grill-chicken.avif", time:"25 mins", tag:"Special"},
+{name:"Onion Raita", price:40, rating:4.1, image:"/image/raita.jpg", time:"5 mins", tag:"Side"},
+{name:"Falooda", price:110, rating:4.6, image:"/image/falooda.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"The Vintage Restaurant & Party Hall": [
+{name:"Cold Coffee", price:120, rating:4.5, image:"/image/cold-coffee.jpg", time:"5 mins", tag:"Popular"},
+{name:"Cappuccino", price:110, rating:4.4, image:"/image/cappuccino.jpg", time:"5 mins", tag:""},
+{name:"Veg Sandwich", price:90, rating:4.2, image:"/image/veg-sandwich.jpg", time:"10 mins", tag:""},
+{name:"Chicken Sandwich", price:130, rating:4.4, image:"/image/chicken-sandwich.jpg", time:"10 mins", tag:"Best Seller"},
+{name:"French Fries", price:100, rating:4.3, image:"/image/french-fries.jpg", time:"10 mins", tag:""},
+{name:"Pasta Alfredo", price:190, rating:4.5, image:"/image/pasta-alfredo.jpg", time:"20 mins", tag:""},
+{name:"Brownie", price:110, rating:4.6, image:"/image/brownie.jpg", time:"10 mins", tag:"Dessert"},
+{name:"Milkshake", price:140, rating:4.5, image:"/image/milkshake.jpg", time:"8 mins", tag:""}
+],
+
+"Sharief Bhai Biryani Hosur | Ramzan Iftar Specials": [
+{name:"Chicken Biryani", price:230, rating:4.7, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Biryani", price:330, rating:4.8, image:"/image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Egg Biryani", price:180, rating:4.4, image:"/image/egg-biryani.jpg", time:"20 mins", tag:""},
+{name:"Kuska", price:120, rating:4.2, image:"/image/kuska.jpg", time:"15 mins", tag:""},
+{name:"Grill Chicken", price:280, rating:4.6, image:"/image/grill-chicken.avif", time:"25 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.5, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Onion Raita", price:40, rating:4.1, image:"/image/raita.jpg", time:"5 mins", tag:"Side"},
+{name:"Double Ka Meetha", price:110, rating:4.6, image:"/image/double-ka-meetha.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Rayalaseema Spice": [
+{name:"BBQ Chicken", price:260, rating:4.6, image:"/image/bbq-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Grill Chicken", price:280, rating:4.7, image:"/image/grill-chicken.avif", time:"25 mins", tag:"Best Seller"},
+{name:"Chicken Wings", price:220, rating:4.5, image:"/image/chicken-wings.jpg", time:"20 mins", tag:"Hot"},
+{name:"Mutton Chops", price:340, rating:4.8, image:"/image/mutton-chops.jpg", time:"30 mins", tag:"Special"},
+{name:"Paneer Tikka", price:210, rating:4.4, image:"/image/paneer-tikka.jpg", time:"20 mins", tag:"Veg"},
+{name:"Garlic Naan", price:45, rating:4.2, image:"/image/garlic-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken Biryani", price:210, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Ice Cream", price:90, rating:4.3, image:"/image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Saffron Restaurant Hosur": [
+{name:"Andhra Chicken Curry", price:230, rating:4.6, image:"/image/andhra-chicken.jpg", time:"25 mins", tag:"Spicy"},
+{name:"Gongura Mutton", price:310, rating:4.7, image:"/image/gongura-mutton.jpg", time:"30 mins", tag:"Special"},
+{name:"Andhra Meals", price:160, rating:4.4, image:"/image/andhra-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Prawn Fry", price:280, rating:4.5, image:"/image/prawn-fry.jpg", time:"25 mins", tag:""},
+{name:"Rasam Rice", price:110, rating:4.2, image:"/image/rasam-rice.jpg", time:"15 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.4, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Curd Rice", price:90, rating:4.1, image:"/image/curd-rice.jpg", time:"10 mins", tag:"Cooling"},
+{name:"Boiled Egg", price:20, rating:4.0, image:"/image/boiled-egg.jpg", time:"5 mins", tag:"Side"}
+],
+
+"The Sun Restaurant": [
+{name:"Masala Dosa", price:90, rating:4.4, image:"/image/masala-dosa.jpg", time:"15 mins", tag:"Popular"},
+{name:"Ghee Roast", price:110, rating:4.5, image:"/image/ghee-roast.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Onion Dosa", price:95, rating:4.3, image:"/image/onion-dosa.jpg", time:"15 mins", tag:""},
+{name:"Plain Dosa", price:70, rating:4.1, image:"/image/plain-dosa.jpg", time:"10 mins", tag:""},
+{name:"Idli", price:60, rating:4.2, image:"/image/idli.jpg", time:"10 mins", tag:""},
+{name:"Vada", price:50, rating:4.1, image:"/image/vada.jpg", time:"10 mins", tag:""},
+{name:"Pongal", price:80, rating:4.2, image:"/image/pongal.jpg", time:"15 mins", tag:""},
+{name:"Filter Coffee", price:40, rating:4.6, image:"/image/filter-coffee.jpg", time:"5 mins", tag:"Drink"}
+],
+
+"Junior Kuppanna Hosur": [
+{name:"Mutton Chukka", price:340, rating:4.8, image:"/image/mutton-chukka.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Chicken Chukka", price:260, rating:4.6, image:"/image/chicken-chukka.jpg", time:"25 mins", tag:"Popular"},
+{name:"Nattu Kozhi Curry", price:300, rating:4.5, image:"/image/nattu-kozhi.jpg", time:"25 mins", tag:""},
+{name:"Vanjaram Fish Fry", price:320, rating:4.7, image:"/image/fish-fry.jpg", time:"25 mins", tag:"Special"},
+{name:"Mutton Biryani", price:320, rating:4.7, image:"/image/mutton-biryani.jpg", time:"30 mins", tag:""},
+{name:"Kothu Parotta", price:180, rating:4.4, image:"/image/kothu-parotta.jpg", time:"20 mins", tag:"Hot"},
+{name:"Parotta", price:20, rating:4.3, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Elaneer Payasam", price:120, rating:4.6, image:"/image/payasam.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Sangeeth Sagar": [
+{name:"Chettinad Chicken", price:240, rating:4.7, image:"/image/chettinad-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Chukka", price:320, rating:4.8, image:"/image/mutton-chukka.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Pepper Chicken", price:210, rating:4.5, image:"/image/pepper-chicken.jpg", time:"20 mins", tag:"Spicy"},
+{name:"Fish Curry", price:230, rating:4.4, image:"/image/fish-curry.jpg", time:"25 mins", tag:""},
+{name:"Chicken Biryani", price:200, rating:4.6, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Kothu Parotta", price:170, rating:4.3, image:"/image/kothu-parotta.jpg", time:"20 mins", tag:"Hot"},
+{name:"Idiyappam", price:90, rating:4.2, image:"/image/idiyappam.jpg", time:"15 mins", tag:""},
+{name:"Kesari", price:60, rating:4.1, image:"/image/kesari.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Saran Restaurant": [
+{name:"Butter Chicken", price:260, rating:4.6, image:"/image/butter-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Paneer Butter Masala", price:220, rating:4.4, image:"/image/paneer-butter-masala.jpg", time:"20 mins", tag:"Veg"},
+{name:"Chicken Fried Rice", price:180, rating:4.3, image:"/image/chicken-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Mutton Gravy", price:320, rating:4.7, image:"/image/mutton-gravy.jpg", time:"30 mins", tag:"Special"},
+{name:"Butter Naan", price:40, rating:4.1, image:"/image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken Lollipop", price:190, rating:4.5, image:"/image/chicken-lollipop.jpg", time:"20 mins", tag:"Hot"},
+{name:"Veg Noodles", price:160, rating:4.2, image:"/image/veg-noodles.jpg", time:"15 mins", tag:""},
+{name:"Ice Cream Sundae", price:110, rating:4.6, image:"/image/ice-cream-sundae.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Beijing Bites Hosur": [
+{name:"Veg Manchow Soup", price:185, rating:4.4, image:"/image/manchow-soup.jpg", time:"15 mins", tag:"Popular"},
+{name:"Chicken Manchow Soup", price:195, rating:4.5, image:"/image/chicken-soup.jpg", time:"15 mins", tag:""},
+{name:"Veg Hakka Noodles", price:219, rating:4.6, image:"/image/hakka-noodles.jpg", time:"20 mins", tag:"Best Seller"},
+{name:"Chicken Hakka Noodles", price:239, rating:4.7, image:"/image/chicken-noodles.jpg", time:"20 mins", tag:""},
+{name:"Egg Fried Rice", price:219, rating:4.5, image:"/image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chilli Chicken", price:249, rating:4.6, image:"/image/chilli-chicken.jpg", time:"25 mins", tag:"Spicy"},
+{name:"Veg Spring Rolls", price:170, rating:4.3, image:"/image/spring-rolls.jpg", time:"15 mins", tag:""},
+{name:"Brownie with Ice Cream", price:130, rating:4.6, image:"/image/brownie-ice-cream.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"ROCK N ROLL B W RESTAURANT": [
+{name:"Pani Puri", price:50, rating:4.2, image:"/image/pani-puri.jpg", time:"10 mins", tag:"Popular"},
+{name:"Chaat", price:70, rating:4.3, image:"/image/chaat.jpg", time:"10 mins", tag:""},
+{name:"Kathi Roll", price:120, rating:4.4, image:"/image/kathi-roll.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Samosa", price:20, rating:4.1, image:"/image/samosa.jpg", time:"5 mins", tag:""},
+{name:"Pav Bhaji", price:110, rating:4.5, image:"/image/pav-bhaji.jpg", time:"15 mins", tag:""},
+{name:"Noodles", price:100, rating:4.2, image:"/image/noodles.jpg", time:"15 mins", tag:""},
+{name:"Falooda", price:90, rating:4.4, image:"/image/falooda.jpg", time:"10 mins", tag:"Dessert"},
+{name:"Lassi", price:60, rating:4.3, image:"/image/lassi.jpg", time:"5 mins", tag:"Drink"}
+],
+
+"Mr.Chef Casual Cuisine": [
+{name:"Veg Burger", price:90, rating:4.2, image:"/image/veg-burger.jpg", time:"15 mins", tag:""},
+{name:"Chicken Burger", price:130, rating:4.4, image:"/image/chicken-burger.jpg", time:"15 mins", tag:"Popular"},
+{name:"Cheese Burger", price:150, rating:4.5, image:"/image/cheese-burger.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Double Patty", price:190, rating:4.6, image:"/image/double-burger.jpg", time:"20 mins", tag:"Hot"},
+{name:"Fries", price:90, rating:4.3, image:"/image/fries.jpg", time:"10 mins", tag:""},
+{name:"Peri Peri Fries", price:110, rating:4.4, image:"/image/peri-peri-fries.jpg", time:"10 mins", tag:""},
+{name:"Chicken Nuggets", price:150, rating:4.5, image:"/image/chicken-nuggets.jpg", time:"15 mins", tag:""},
+{name:"Cold Coffee", price:100, rating:4.3, image:"/image/cold-coffee.jpg", time:"5 mins", tag:"Drink"}
+],
+
+"Sri venkateshwara": [
+{name:"Tandoori Chicken", price:270, rating:4.6, image:"/image/tandoori-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Chicken Tikka", price:240, rating:4.5, image:"/image/chicken-tikka.jpg", time:"20 mins", tag:"Best Seller"},
+{name:"Paneer Tikka", price:220, rating:4.4, image:"/image/paneer-tikka.jpg", time:"20 mins", tag:"Veg"},
+{name:"Butter Naan", price:45, rating:4.2, image:"/image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken Biryani", price:210, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Dal Makhani", price:180, rating:4.3, image:"/image/dal-makhani.jpg", time:"20 mins", tag:""},
+{name:"Jeera Rice", price:130, rating:4.2, image:"/image/jeera-rice.jpg", time:"15 mins", tag:""},
+{name:"Brownie", price:110, rating:4.6, image:"/image/brownie.jpg", time:"10 mins", tag:"Dessert"}
+],
+"Hotel Ashok Bhavan Veg & Non Vegs": [
+{name:"South Indian Veg Meals", price:140, rating:4.5, image:"/image/meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Curry", price:210, rating:4.4, image:"/image/chicken-curry.jpg", time:"20 mins", tag:""},
+{name:"Mutton Gravy", price:280, rating:4.5, image:"/image/mutton-gravy.jpg", time:"25 mins", tag:"Best Seller"},
+{name:"Fish Fry", price:190, rating:4.3, image:"/image/fish-fry.jpg", time:"20 mins", tag:"Hot"},
+{name:"Parotta", price:15, rating:4.2, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Egg Curry", price:140, rating:4.2, image:"/image/egg-curry.jpg", time:"15 mins", tag:""},
+{name:"Chicken Biryani", price:200, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"ABIKAVI FAMILY RESTAURANT": [
+{name:"Full Meals", price:150, rating:4.4, image:"/image/meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Curry Meals", price:220, rating:4.5, image:"/image/chicken-curry.jpg", time:"25 mins", tag:"Best Seller"},
+{name:"Mutton Curry", price:280, rating:4.6, image:"/image/mutton-curry.jpg", time:"30 mins", tag:"Special"},
+{name:"Fish Fry", price:190, rating:4.3, image:"/image/fish-fry.jpg", time:"20 mins", tag:"Hot"},
+{name:"Egg Masala", price:140, rating:4.2, image:"/image/egg-masala.jpg", time:"15 mins", tag:""},
+{name:"Sambar Rice", price:100, rating:4.1, image:"/image/sambar-rice.jpg", time:"15 mins", tag:"Veg"},
+{name:"Curd Rice", price:90, rating:4.0, image:"/image/curd-rice.jpg", time:"10 mins", tag:"Cooling"},
+{name:"Parotta with Salna", price:120, rating:4.3, image:"/image/parotta.jpg", time:"20 mins", tag:"Evening Special"}
+],
+
+"SRI JAYAM RESTAURANT": [
+{name:"Mini Meals", price:120, rating:4.3, image:"/image/meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Biryani", price:210, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:"Best Seller"},
+{name:"Egg Fried Rice", price:150, rating:4.2, image:"/image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.4, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Parotta", price:15, rating:4.2, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Veg Kurma", price:140, rating:4.1, image:"/image/veg-kurma.jpg", time:"15 mins", tag:"Veg"},
+{name:"Meals with Fish Fry", price:220, rating:4.5, image:"/image/fish-fry.jpg", time:"25 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"On Time Restaurant": [
+{name:"Chicken Biryani", price:210, rating:4.6, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Biryani", price:320, rating:4.7, image:"/image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Egg Biryani", price:170, rating:4.3, image:"/image/egg-biryani.jpg", time:"20 mins", tag:""},
+{name:"Kuska", price:120, rating:4.2, image:"/image/kuska.jpg", time:"15 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.4, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Grill Chicken", price:270, rating:4.5, image:"/image/grill-chicken.avif", time:"25 mins", tag:""},
+{name:"Raita", price:40, rating:4.1, image:"/image/raita.jpg", time:"5 mins", tag:"Side"},
+{name:"Falooda", price:110, rating:4.6, image:"/image/falooda.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Hotel lakshmi narayana": [
+{name:"Spicy Chicken Curry", price:230, rating:4.6, image:"/image/spicy-chicken.jpg", time:"25 mins", tag:"Spicy"},
+{name:"Paneer Tikka Masala", price:220, rating:4.4, image:"/image/paneer-tikka.jpg", time:"20 mins", tag:"Veg"},
+{name:"Veg Fried Rice", price:160, rating:4.2, image:"/image/veg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chicken Noodles", price:170, rating:4.3, image:"/image/chicken-noodles.jpg", time:"20 mins", tag:""},
+{name:"Butter Naan", price:40, rating:4.1, image:"/image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Dal Fry", price:140, rating:4.2, image:"/image/dal-fry.jpg", time:"15 mins", tag:""},
+{name:"Chicken Lollipop", price:190, rating:4.5, image:"/image/chicken-lollipop.jpg", time:"20 mins", tag:"Hot"},
+{name:"Ice Cream", price:90, rating:4.3, image:"/image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"OASIS FOOD COURT": [
+{name:"Country Chicken Curry", price:240, rating:4.6, image:"/image/country-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Mutton Sukka", price:310, rating:4.7, image:"/image/mutton-sukka.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Kothu Parotta", price:170, rating:4.3, image:"/image/kothu-parotta.jpg", time:"20 mins", tag:"Hot"},
+{name:"Fish Curry", price:220, rating:4.4, image:"/image/fish-curry.jpg", time:"25 mins", tag:""},
+{name:"Chicken Biryani", price:200, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Parotta", price:15, rating:4.2, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Idiyappam", price:90, rating:4.1, image:"/image/idiyappam.jpg", time:"15 mins", tag:""},
+{name:"Kesari", price:60, rating:4.2, image:"/image/kesari.jpg", time:"5 mins", tag:"Dessert"}
+],
+"Srinivasa": [
+{name:"Veg Meals", price:140, rating:4.5, image:"/image/veg-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Masala Dosa", price:90, rating:4.4, image:"/image/masala-dosa.jpg", time:"15 mins", tag:""},
+{name:"Idli", price:60, rating:4.2, image:"/image/idli.jpg", time:"10 mins", tag:""},
+{name:"Vada", price:50, rating:4.1, image:"/image/vada.jpg", time:"10 mins", tag:""},
+{name:"Pongal", price:80, rating:4.2, image:"/image/pongal.jpg", time:"15 mins", tag:""},
+{name:"Poori Masala", price:90, rating:4.3, image:"/image/poori.jpg", time:"15 mins", tag:""},
+{name:"Veg Biryani", price:160, rating:4.3, image:"/image/veg-biryani.jpg", time:"20 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Sri Eswari Dhaba Restaurant": [
+{name:"Tandoori Chicken", price:260, rating:4.5, image:"/image/tandoori-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Chicken Curry", price:220, rating:4.4, image:"/image/chicken-curry.jpg", time:"20 mins", tag:""},
+{name:"Egg Fried Rice", price:160, rating:4.2, image:"/image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Mutton Gravy", price:310, rating:4.6, image:"/image/mutton-gravy.jpg", time:"30 mins", tag:"Special"},
+{name:"Parotta", price:15, rating:4.3, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Veg Kurma", price:140, rating:4.1, image:"/image/veg-kurma.jpg", time:"15 mins", tag:"Veg"},
+{name:"Tea", price:15, rating:4.0, image:"/image/tea.jpg", time:"5 mins", tag:"Drink"},
+{name:"Ice Cream", price:80, rating:4.3, image:"/image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Murugan Tiffin Kadai": [
+{name:"Veg Meals", price:140, rating:4.5, image:"/image/veg-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Paneer Butter Masala", price:210, rating:4.4, image:"/image/paneer-butter-masala.jpg", time:"20 mins", tag:""},
+{name:"Chilli Gobi", price:170, rating:4.3, image:"/image/chilli-gobi.jpg", time:"15 mins", tag:"Hot"},
+{name:"Veg Fried Rice", price:150, rating:4.2, image:"/image/veg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Butter Naan", price:40, rating:4.1, image:"/image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Mushroom Masala", price:190, rating:4.3, image:"/image/mushroom-masala.jpg", time:"20 mins", tag:""},
+{name:"Veg Noodles", price:140, rating:4.2, image:"/image/veg-noodles.jpg", time:"15 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"AFC ARAVIND FRIED CHICKEN": [
+{name:"Fried Chicken Bucket", price:299, rating:4.6, image:"/image/fried-chicken.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Wings", price:220, rating:4.5, image:"/image/chicken-wings.jpg", time:"20 mins", tag:"Hot"},
+{name:"Chicken Popcorn", price:180, rating:4.4, image:"/image/chicken-popcorn.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Chicken Burger", price:130, rating:4.3, image:"/image/chicken-burger.jpg", time:"15 mins", tag:""},
+{name:"French Fries", price:90, rating:4.2, image:"/image/fries.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken Roll", price:140, rating:4.3, image:"/image/chicken-roll.jpg", time:"15 mins", tag:""},
+{name:"Cola", price:40, rating:4.1, image:"/image/cola.jpg", time:"5 mins", tag:"Drink"},
+{name:"Choco Lava Cake", price:99, rating:4.7, image:"/image/lava-cake.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"AZHAGHI TIFFIN CENTRE": [
+{name:"Idli", price:15, rating:4.5, image:"/image/idli.jpg", time:"10 mins", tag:"Popular"},
+{name:"Dosa", price:40, rating:4.4, image:"/image/dosa.jpg", time:"15 mins", tag:""},
+{name:"Masala Dosa", price:60, rating:4.6, image:"/image/masala-dosa.jpg", time:"15 mins", tag:"Best Seller"},
+{name:"Pongal", price:50, rating:4.3, image:"/image/pongal.jpg", time:"15 mins", tag:""},
+{name:"Poori Masala", price:60, rating:4.4, image:"/image/poori.jpg", time:"15 mins", tag:""},
+{name:"Vada", price:15, rating:4.2, image:"/image/vada.jpg", time:"10 mins", tag:"Hot"},
+{name:"Upma", price:40, rating:4.1, image:"/image/upma.jpg", time:"10 mins", tag:""},
+{name:"Filter Coffee", price:20, rating:4.7, image:"/image/filter-coffee.jpg", time:"5 mins", tag:"Drink"}
+],
+
+ "Dharshini Dhaba": [
+{name:"Andhra Chicken Curry", price:230, rating:4.6, image:"/image/andhra-chicken.jpg", time:"25 mins", tag:"Spicy"},
+{name:"Gongura Mutton", price:310, rating:4.7, image:"/image/gongura-mutton.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Andhra Meals", price:160, rating:4.4, image:"/image/andhra-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Prawn Fry", price:280, rating:4.5, image:"/image/prawn-fry.jpg", time:"25 mins", tag:""},
+{name:"Rasam Rice", price:110, rating:4.2, image:"/image/rasam-rice.jpg", time:"15 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.4, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Curd Rice", price:90, rating:4.1, image:"/image/curd-rice.jpg", time:"10 mins", tag:"Cooling"},
+{name:"Boiled Egg", price:20, rating:4.0, image:"/image/boiled-egg.jpg", time:"5 mins", tag:"Side"}
+],
+"Guru Ganesha Hotel": [
+{name:"Full Meals", price:150, rating:4.4, image:"/image/south-indian-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Biryani", price:210, rating:4.5, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:"Best Seller"},
+{name:"Mutton Curry", price:280, rating:4.6, image:"/image/mutton-curry.jpg", time:"30 mins", tag:"Special"},
+{name:"Egg Fried Rice", price:150, rating:4.2, image:"/image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chicken 65", price:190, rating:4.4, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Parotta (2 pcs)", price:40, rating:4.3, image:"/image/parotta.jpg", time:"15 mins", tag:""},
+{name:"Veg Meals", price:120, rating:4.1, image:"/image/veg-meals.jpg", time:"20 mins", tag:"Veg"},
+{name:"Curd Rice", price:90, rating:4.0, image:"/image/curd-rice.jpg", time:"10 mins", tag:"Cooling"}
+],
+
+"THANGARAJ SANDHAI KARI HOTEL": [
+{name:"Chettinad Chicken Fry", price:280, rating:4.7, image:"/image/chettinad-chicken.jpg", time:"25 mins", tag:"Special"},
+{name:"Veg Kurma", price:150, rating:4.3, image:"/image/veg-kurma.jpg", time:"20 mins", tag:"Veg"},
+{name:"Chicken Dum Biryani", price:300, rating:4.6, image:"/image/chicken-biryani.jpg", time:"30 mins", tag:"Popular"},
+{name:"Mutton Pepper Fry", price:350, rating:4.8, image:"/image/mutton-pepper.jpg", time:"35 mins", tag:"Hot"},
+{name:"Roti", price:20, rating:4.2, image:"/image/roti.jpg", time:"10 mins", tag:"Side"},
+{name:"Chicken 65", price:200, rating:4.5, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Spicy"},
+{name:"Veg Fried Rice", price:160, rating:4.3, image:"/image/veg-fried-rice.jpg", time:"20 mins", tag:"Veg"},
+{name:"mutton gravy", price:120, rating:4.6, image:"/image/mutton-gravy.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Hotel Raja Rani": [
+{name:"Mutton Biryani", price:330, rating:4.8, image:"/image/mutton-biryani.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Paneer Tikka Masala", price:220, rating:4.5, image:"/image/paneer-tikka.jpg", time:"20 mins", tag:"Veg"},
+{name:"Chicken Korma", price:250, rating:4.6, image:"/image/chicken-korma.jpg", time:"25 mins", tag:"Popular"},
+{name:"Egg Curry", price:160, rating:4.3, image:"/image/egg-curry.jpg", time:"15 mins", tag:""},
+{name:"Fish Fry", price:270, rating:4.7, image:"/image/fish-fry.jpg", time:"25 mins", tag:"Hot"},
+{name:"Veg Pulao", price:140, rating:4.2, image:"/image/veg-pulao.jpg", time:"20 mins", tag:"Veg"},
+{name:"Raita", price:50, rating:4.1, image:"/image/raita.jpg", time:"5 mins", tag:"Side"},
+{name:"dosa", price:40, rating:4.6, image:"/image/dosa.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Bake N Food": [
+{name:"Chicken Fried Rice", price:180, rating:4.5, image:"/image/chicken-fried-rice.jpg", time:"20 mins", tag:"Popular"},
+{name:"Veg Manchurian", price:160, rating:4.3, image:"/image/veg-manchurian.jpg", time:"15 mins", tag:"Starter"},
+{name:"Paneer Butter Masala", price:220, rating:4.6, image:"/image/paneer-butter-masala.jpg", time:"20 mins", tag:"Veg"},
+{name:"Egg Fried Rice", price:170, rating:4.2, image:"/image/egg-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Chicken Curry", price:220, rating:4.5, image:"/image/chicken-curry.jpg", time:"25 mins", tag:"Hot"},
+{name:"Gobi 65", price:160, rating:4.3, image:"/image/gobi-65.jpg", time:"15 mins", tag:"Veg"},
+{name:"Fish Curry", price:230, rating:4.6, image:"/image/fish-curry.jpg", time:"25 mins", tag:"Special"},
+{name:"Ice Cream Sundae", price:100, rating:4.4, image:"/image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+"A1 Ambur Dum Biryani": [
+  {name:"Ambur Chicken Biryani", price:240, rating:4.7, image:"image/ambur-chicken-biryani.jpg", time:"25 mins", tag:"Best Seller"},
+  {name:"Ambur Mutton Biryani", price:320, rating:4.8, image:"image/ambur-mutton-biryani.jpg", time:"30 mins", tag:"Popular"},
+  {name:"Chicken 65", price:200, rating:4.5, image:"image/chicken-65.jpg", time:"20 mins", tag:"Starter"},
+  {name:"Mutton Chukka", price:340, rating:4.6, image:"image/mutton-chukka.jpg", time:"25 mins", tag:"Hot"},
+  {name:"Egg Biryani", price:180, rating:4.3, image:"image/egg-biryani.jpg", time:"20 mins", tag:""},
+  {name:"Onion Raita", price:40, rating:4.2, image:"image/raita.jpg", time:"5 mins", tag:"Side"},
+  {name:"Brinjal Curry", price:60, rating:4.3, image:"image/brinjal-curry.jpg", time:"10 mins", tag:"Side"},
+  {name:"Gulab Jamun", price:90, rating:4.6, image:"image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Bargur Hotel": [
+{name:"South Indian Meals", price:120, rating:4.4, image:"/image/south-indian-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Masala Dosa", price:80, rating:4.3, image:"/image/masala-dosa.jpg", time:"15 mins", tag:""},
+{name:"Idli", price:15, rating:4.1, image:"/image/idli.jpg", time:"10 mins", tag:""},
+{name:"Poori", price:25, rating:4.2, image:"/image/poori.jpg", time:"15 mins", tag:""},
+{name:"Veg Kurma", price:140, rating:4.1, image:"/image/veg-kurma.jpg", time:"15 mins", tag:"Veg"},
+{name:"Chilli Gobi", price:160, rating:4.3, image:"/image/chilli-gobi.jpg", time:"15 mins", tag:"Hot"},
+{name:"Veg Noodles", price:140, rating:4.2, image:"/image/veg-noodles.jpg", time:"15 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Agni Restaurant": [
+{name:"Chettinad Chicken", price:240, rating:4.7, image:"/image/chettinad-chicken.jpg", time:"25 mins", tag:"Popular"},
+{name:"Pepper Chicken", price:210, rating:4.5, image:"/image/pepper-chicken.jpg", time:"20 mins", tag:"Spicy"},
+{name:"Mutton Chukka", price:320, rating:4.8, image:"/image/mutton-chukka.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Fish Fry", price:200, rating:4.4, image:"/image/fish-fry.jpg", time:"20 mins", tag:""},
+{name:"Chicken Biryani", price:210, rating:4.6, image:"/image/chicken-biryani.jpg", time:"25 mins", tag:""},
+{name:"Kothu Parotta", price:170, rating:4.3, image:"/image/kothu-parotta.jpg", time:"20 mins", tag:"Hot"},
+{name:"Idiyappam", price:90, rating:4.2, image:"/image/idiyappam.jpg", time:"15 mins", tag:""},
+{name:"Gulab Jamun", price:70, rating:4.6, image:"/image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"santosh Hotel": [
+{name:"Tandoori Chicken (Full)", price:380, rating:4.7, image:"/image/tandoori-chicken.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Butter Naan", price:40, rating:4.4, image:"/image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+{name:"Paneer Tikka", price:220, rating:4.5, image:"/image/paneer-tikka.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Tikka", price:260, rating:4.6, image:"/image/chicken-tikka.jpg", time:"20 mins", tag:"Hot"},
+{name:"Veg Pulao", price:150, rating:4.2, image:"/image/veg-pulao.jpg", time:"20 mins", tag:""},
+{name:"Dal Fry", price:140, rating:4.3, image:"/image/dal-fry.jpg", time:"15 mins", tag:"Veg"},
+{name:"Chicken Gravy", price:230, rating:4.5, image:"/image/chicken-gravy.jpg", time:"25 mins", tag:""},
+{name:"mutton Gravy", price:250, rating:4.6, image:"/image/mutton-gravy.jpg", time:"10 mins", tag:"Dessert"}
+],
+"Hotel Saravanabavan Veg": [
+{name:"Mini Meals", price:110, rating:4.2, image:"/image/meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Fried Rice", price:170, rating:4.3, image:"/image/chicken-fried-rice.jpg", time:"20 mins", tag:""},
+{name:"Veg Manchurian", price:160, rating:4.2, image:"/image/veg-manchurian.jpg", time:"15 mins", tag:"Starter"},
+{name:"Parotta (2 pcs)", price:30, rating:4.1, image:"/image/parotta.jpg", time:"10 mins", tag:"Side"},
+{name:"Egg Curry", price:150, rating:4.2, image:"/image/egg-curry.jpg", time:"15 mins", tag:""},
+{name:"Fish Fry", price:210, rating:4.4, image:"/image/fish-fry.jpg", time:"20 mins", tag:""},
+{name:"Veg Noodles", price:140, rating:4.1, image:"/image/veg-noodles.jpg", time:"15 mins", tag:""},
+{name:"Ice Cream", price:90, rating:4.3, image:"/image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Gopal s restaurant": [
+{name:"Andhra Chicken Curry", price:240, rating:4.6, image:"/image/andhra-chicken.jpg", time:"25 mins", tag:"Spicy"},
+{name:"Gongura Mutton", price:330, rating:4.8, image:"/image/mutton-curry.jpg", time:"30 mins", tag:"Best Seller"},
+{name:"Andhra Meals", price:150, rating:4.4, image:"/image/south-indian-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken 65", price:200, rating:4.5, image:"/image/chicken-65.jpg", time:"20 mins", tag:"Hot"},
+{name:"Egg Biryani", price:180, rating:4.3, image:"/image/egg-biryani.jpg", time:"20 mins", tag:""},
+{name:"Veg Fry", price:130, rating:4.1, image:"/image/veg-fry.jpg", time:"15 mins", tag:"Veg"},
+{name:"Chapati (2 pcs)", price:40, rating:4.2, image:"/image/chapati.jpg", time:"10 mins", tag:"Side"},
+{name:"Double Ka Meetha", price:100, rating:4.6, image:"/image/double-ka-meetha.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"G Saamy": [
+{name:"Full Meals", price:130, rating:4.4, image:"/image/south-indian-meals.jpg", time:"20 mins", tag:"Popular"},
+{name:"Chicken Curry", price:210, rating:4.5, image:"/image/chicken-curry.jpg", time:"20 mins", tag:""},
+{name:"Mutton Curry", price:300, rating:4.6, image:"/image/mutton-curry.jpg", time:"25 mins", tag:""},
+{name:"Rasam", price:50, rating:4.2, image:"/image/rasam.jpg", time:"10 mins", tag:"Side"},
+{name:"Curd Rice", price:50, rating:4.3, image:"/image/curd-rice.jpg", time:"10 mins", tag:""},
+{name:"chicken biryani", price:110, rating:4.1, image:"/image/chicken-biryani.jpg", time:"10 mins", tag:"Veg"},
+{name:"Omelette", price:40, rating:4.2, image:"/image/omelette.jpg", time:"10 mins", tag:""},
+{name:"Payasam", price:80, rating:4.5, image:"/image/payasam.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Raj Dhaba Hotel": [
+  {name:"Butter Chicken", price:260, rating:4.7, image:"image/butter-chicken.jpg", time:"25 mins", tag:"Best Seller"},
+  {name:"Paneer Butter Masala", price:220, rating:4.5, image:"image/paneer-butter-masala.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Dal Makhani", price:180, rating:4.4, image:"image/dal-makhani.jpg", time:"20 mins", tag:"Veg"},
+  {name:"Tandoori Chicken", price:300, rating:4.6, image:"image/tandoori-chicken.jpg", time:"30 mins", tag:"Hot"},
+  {name:"Butter Naan", price:40, rating:4.3, image:"image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+  {name:"Chicken Tikka", price:250, rating:4.5, image:"image/chicken-tikka.jpg", time:"20 mins", tag:""},
+  {name:"Jeera Rice", price:150, rating:4.2, image:"image/jeera-rice.jpg", time:"15 mins", tag:""},
+  {name:"Gulab Jamun", price:90, rating:4.6, image:"image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"Anandhas": [
+  {name:"BBQ Chicken Wings", price:240, rating:4.6, image:"image/bbq-chicken-wings.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Grilled Fish", price:280, rating:4.5, image:"image/grilled-fish.jpg", time:"25 mins", tag:""},
+  {name:"Chicken Shawarma", price:140, rating:4.4, image:"image/chicken-shawarma.jpg", time:"15 mins", tag:"Best Seller"},
+  {name:"BBQ Paneer", price:210, rating:4.3, image:"image/bbq-paneer.jpg", time:"20 mins", tag:"Veg"},
+  {name:"Chicken Burger", price:160, rating:4.2, image:"image/chicken-burger.jpg", time:"15 mins", tag:""},
+  {name:"French Fries", price:100, rating:4.3, image:"image/french-fries.jpg", time:"10 mins", tag:"Side"},
+  {name:"Mojito", price:90, rating:4.5, image:"image/mojito.webp ", time:"5 mins", tag:"Drink"},
+  {name:"Chocolate Brownie", price:110, rating:4.6, image:"image/brownie.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Moon light family Restaurant": [
+  {name:"Classic Veg Burger", price:120, rating:4.2, image:"image/veg-burger.jpg", time:"15 mins", tag:"Popular"},
+  {name:"Cheese Chicken Burger", price:170, rating:4.5, image:"image/cheese-chicken-burger.jpg", time:"15 mins", tag:"Best Seller"},
+  {name:"Double Patty Burger", price:220, rating:4.6, image:"image/double-patty-burger.jpg", time:"20 mins", tag:""},
+  {name:"Veg Wrap", price:130, rating:4.1, image:"image/veg-wrap.jpg", time:"15 mins", tag:""},
+  {name:"Chicken Wrap", price:160, rating:4.3, image:"image/chicken-wrap.jpg", time:"15 mins", tag:""},
+  {name:"Peri Peri Fries", price:110, rating:4.4, image:"image/peri-peri-fries.jpg", time:"10 mins", tag:"Side"},
+  {name:"Cold Coffee", price:100, rating:4.3, image:"image/cold-coffee.jpg", time:"5 mins", tag:"Drink"},
+  {name:"Vanilla Ice Cream", price:80, rating:4.2, image:"image/vanilla-ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+
+    "Hotel Sri Saravana Bhavan": [
+    {name:"Spicy Chicken Curry", price:230, rating:4.5, image:"image/spicy-chicken.jpg", time:"25 mins", tag:"Spicy"},
+    {name:"Paneer Butter Masala", price:220, rating:4.4, image:"image/paneer-butter-masala.jpg", time:"20 mins", tag:"Veg"},
+    {name:"Veg Fried Rice", price:150, rating:4.2, image:"image/veg-fried-rice.jpg", time:"20 mins", tag:""},
+    {name:"Chicken Noodles", price:170, rating:4.3, image:"image/chicken-noodles.jpg", time:"20 mins", tag:""},
+    {name:"Parotta", price:15, rating:4.2, image:"image/parotta.jpg", time:"10 mins", tag:"Side"},
+    {name:"Fish Curry", price:220, rating:4.4, image:"image/fish-curry.jpg", time:"25 mins", tag:""},
+    {name:"Gobi Manchurian", price:160, rating:4.3, image:"image/gobi-manchurian.jpg", time:"15 mins", tag:"Starter"},
+    {name:"Kesari", price:70, rating:4.2, image:"image/kesari.jpg", time:"5 mins", tag:"Dessert"}
+  ],
+
+  "Salem RR Biryani": [
+    {name:"Chicken biryani", price:150, rating:4.4, image:"image/chicken-biryani.jpg", time:"20 mins", tag:"Popular"},
+    {name:"Masala Dosa", price:90, rating:4.3, image:"image/masala-dosa.jpg", time:"15 mins", tag:""},
+    {name:"Idli", price:15, rating:4.1, image:"image/idli.jpg", time:"10 mins", tag:""},
+    {name:"Poori", price:25, rating:4.2, image:"image/poori.jpg", time:"15 mins", tag:""},
+    {name:"Chilli Gobi", price:170, rating:4.3, image:"image/chilli-gobi.jpg", time:"15 mins", tag:"Hot"},
+    {name:"Veg Noodles", price:150, rating:4.2, image:"image/veg-noodles.jpg", time:"15 mins", tag:""},
+    {name:"Curd Rice", price:90, rating:4.3, image:"image/curd-rice.jpg", time:"10 mins", tag:""},
+    {name:"Gulab Jamun", price:80, rating:4.6, image:"image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+  ],
+"Hotel New Arya Bhavan": [
+  {name:"Andhra Meals", price:150, rating:4.5, image:"image/andhra-meals.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Andhra Chicken Curry", price:240, rating:4.6, image:"image/andhra-chicken-curry.jpg", time:"25 mins", tag:"Spicy"},
+  {name:"Gongura Mutton", price:330, rating:4.8, image:"image/gongura-mutton.jpg", time:"30 mins", tag:"Best Seller"},
+  {name:"Chicken 65", price:200, rating:4.5, image:"image/chicken-65.jpg", time:"20 mins", tag:""},
+  {name:"Egg Curry", price:160, rating:4.2, image:"image/egg-curry.jpg", time:"15 mins", tag:""},
+  {name:"Veg Fried rice", price:130, rating:4.1, image:"image/veg-fried-rice.jpg", time:"15 mins", tag:"Veg"},
+  {name:"Chapati (2 pcs)", price:40, rating:4.2, image:"image/roti.jpg", time:"10 mins", tag:"Side"},
+  {name:"Double Ka Meetha", price:110, rating:4.6, image:"image/double-ka-meetha.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Sankar Cafe": [
+  {name:"Mini Meals", price:120, rating:4.2, image:"image/meals.jpg", time:"20 mins", tag:""},
+  {name:"Chicken Fried Rice", price:180, rating:4.3, image:"image/chicken-fried-rice.jpg", time:"20 mins", tag:""},
+  {name:"Veg Manchurian", price:160, rating:4.2, image:"image/veg-manchurian.jpg", time:"15 mins", tag:"Starter"},
+  {name:"Fish Fry", price:220, rating:4.4, image:"image/fish-fry.jpg", time:"20 mins", tag:""},
+  {name:"Parotta (2 pcs)", price:30, rating:4.1, image:"image/parotta.jpg", time:"10 mins", tag:"Side"},
+  {name:"Omelette", price:40, rating:4.2, image:"image/omelette.jpg", time:"10 mins", tag:""},
+  {name:"Veg Noodles", price:150, rating:4.1, image:"image/veg-noodles.jpg", time:"15 mins", tag:""},
+  {name:"Ice Cream", price:90, rating:4.3, image:"image/ice-cream.jpg", time:"5 mins", tag:"Dessert"}
+],
+
+"SS Dhaba Family Restaurant": [
+  {name:"Chettinad Chicken", price:250, rating:4.7, image:"image/chettinad-chicken.jpg", time:"25 mins", tag:"Popular"},
+  {name:"Mutton Chukka", price:340, rating:4.8, image:"image/mutton-chukka.jpg", time:"30 mins", tag:"Best Seller"},
+  {name:"Fish Fry", price:220, rating:4.5, image:"image/fish-fry.jpg", time:"20 mins", tag:""},
+  {name:"Chicken Biryani", price:220, rating:4.6, image:"image/chicken-biryani.jpg", time:"25 mins", tag:""},
+  {name:"Kothu Parotta", price:180, rating:4.4, image:"image/kothu-parotta.jpg", time:"20 mins", tag:"Hot"},
+  {name:"Idiyappam", price:90, rating:4.2, image:"image/idiyappam.jpg", time:"15 mins", tag:""},
+  {name:"Pepper Chicken", price:230, rating:4.6, image:"image/pepper-chicken.jpg", time:"20 mins", tag:"Spicy"},
+  {name:"Payasam", price:90, rating:4.5, image:"image/payasam.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Sri Annapoorna Restaurant": [
+  {name:"BBQ Chicken Wings", price:250, rating:4.6, image:"image/bbq-chicken-wings.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Grilled Fish", price:290, rating:4.5, image:"image/grilled-fish.jpg", time:"25 mins", tag:""},
+  {name:"Chicken Shawarma", price:150, rating:4.4, image:"image/chicken-shawarma.jpg", time:"15 mins", tag:"Best Seller"},
+  {name:"BBQ Paneer", price:220, rating:4.3, image:"image/bbq-paneer.jpg", time:"20 mins", tag:"Veg"},
+  {name:"Chicken Burger", price:170, rating:4.2, image:"image/chicken-burger.jpg", time:"15 mins", tag:""},
+  {name:"French Fries", price:110, rating:4.3, image:"image/french-fries.jpg", time:"10 mins", tag:"Side"},
+  {name:"Mojito", price:100, rating:4.5, image:"image/mojito.webp", time:"5 mins", tag:"Drink"},
+  {name:"Chocolate Brownie", price:120, rating:4.6, image:"image/brownie.jpg", time:"10 mins", tag:"Dessert"}
+],
+  "ASHA Restaurant": [
+  {name:"Margherita Pizza", price:190, rating:4.3, image:"image/margherita-pizza.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Chicken Pizza", price:260, rating:4.5, image:"image/chicken-pizza.jpg", time:"25 mins", tag:"Best Seller"},
+  {name:"Veg Supreme Pizza", price:240, rating:4.4, image:"image/veg-supreme-pizza.jpg", time:"20 mins", tag:""},
+  {name:"Garlic Bread", price:100, rating:4.2, image:"image/garlic-bread.jpg", time:"10 mins", tag:"Side"},
+  {name:"French Fries", price:110, rating:4.3, image:"image/french-fries.jpg", time:"10 mins", tag:""},
+  {name:"Chicken Nuggets", price:150, rating:4.4, image:"image/chicken-nuggets.jpg", time:"15 mins", tag:""},
+  {name:"Burger Combo", price:160, rating:4.2, image:"image/burger-combo.jpg", time:"15 mins", tag:""},
+  {name:"Chocolate Shake", price:130, rating:4.6, image:"image/chocolate-shake.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"TAMILKUIL Food court": [
+  {name:"Veg Sandwich", price:90, rating:4.2, image:"image/veg-sandwich.jpg", time:"10 mins", tag:""},
+  {name:"Chicken Sandwich", price:120, rating:4.3, image:"image/chicken-sandwich.jpg", time:"15 mins", tag:"Popular"},
+  {name:"Pasta", price:170, rating:4.4, image:"image/pasta.jpg", time:"20 mins", tag:""},
+  {name:"Cold Coffee", price:110, rating:4.3, image:"image/cold-coffee.jpg", time:"5 mins", tag:"Drink"},
+  {name:"French Fries", price:100, rating:4.2, image:"image/french-fries.jpg", time:"10 mins", tag:"Side"},
+  {name:"Veg Burger", price:130, rating:4.1, image:"image/veg-burger.jpg", time:"15 mins", tag:""},
+  {name:"Chicken Burger", price:160, rating:4.3, image:"image/chicken-burger.jpg", time:"15 mins", tag:""},
+  {name:"Brownie with Ice Cream", price:140, rating:4.6, image:"image/brownie-ice-cream.jpg", time:"10 mins", tag:"Dessert"}
+],
+
+"Hotel R.K.": [
+  {name:"Tandoori Chicken (Full)", price:390, rating:4.7, image:"image/tandoori-chicken.jpg", time:"30 mins", tag:"Best Seller"},
+  {name:"Butter Naan", price:40, rating:4.4, image:"image/butter-naan.jpg", time:"10 mins", tag:"Side"},
+  {name:"Paneer Tikka", price:230, rating:4.5, image:"image/paneer-tikka.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Chicken Tikka", price:270, rating:4.6, image:"image/chicken-tikka.jpg", time:"20 mins", tag:"Hot"},
+  {name:"Veg Pulao", price:160, rating:4.2, image:"image/veg-pulao.jpg", time:"20 mins", tag:""},
+  {name:"Dal Fry", price:150, rating:4.3, image:"image/dal-fry.jpg", time:"15 mins", tag:"Veg"},
+  {name:"Chicken Gravy", price:240, rating:4.5, image:"image/chicken-gravy.jpg", time:"25 mins", tag:""},
+  {name:"Gulab Jamun", price:90, rating:4.6, image:"image/gulab-jamun.jpg", time:"5 mins", tag:"Dessert"}
+],
+"Hotel RajaVirundhu": [
+  {name:"South Indian Meals", price:140, rating:4.5, image:"image/south-indian-meals.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Chicken Curry Meals", price:220, rating:4.6, image:"image/chicken-curry-meals.jpg", time:"25 mins", tag:"Best Seller"},
+  {name:"Mutton Curry", price:320, rating:4.7, image:"image/mutton-curry.jpg", time:"30 mins", tag:"Hot"},
+  {name:"Fish Fry", price:210, rating:4.4, image:"image/fish-fry.jpg", time:"20 mins", tag:""},
+  {name:"Parotta (2 pcs)", price:30, rating:4.2, image:"image/parotta.jpg", time:"10 mins", tag:"Side"},
+  {name:"Kothu Parotta", price:180, rating:4.5, image:"image/kothu-parotta.jpg", time:"20 mins", tag:"Popular"},
+  {name:"Egg Curry", price:150, rating:4.3, image:"image/egg-curry.jpg", time:"15 mins", tag:""},
+  {name:"Payasam", price:90, rating:4.6, image:"image/payasam.jpg", time:"10 mins", tag:"Dessert"}
+],
+};
+
+// Get selected hotel
+const selectedHotel = localStorage.getItem("selectedHotel");
+
+// Show hotel name in hero title
+if(selectedHotel){
+  document.querySelector(".section-title").innerText = selectedHotel + " - Menu";
+}
+
+// Get foods for that hotel
+const foods = menuData[selectedHotel] || [];
+
+if(foods.length === 0){
+  document.getElementById("food-container").innerHTML =
+    "<h2 style='text-align:center'>No menu available</h2>";
+}
+
+// CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function loadFoods(foodList = foods){
+
+  const container = document.getElementById("food-container");
+  container.innerHTML = "";
+
+  let pattern = [3,2,3,2,3];
+  let currentIndex = 0;
+
+  pattern.forEach(num => {
+
+    if(currentIndex >= foodList.length) return;
+
+    const row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.justifyContent = "center";
+    row.style.gap = "30px";
+    row.style.marginBottom = "30px";
+
+    for(let i=0; i<num && currentIndex < foodList.length; i++){
+
+      const food = foodList[currentIndex];
+
+      const card = document.createElement("div");
+      card.className = "food-card";
+      card.style.setProperty('--i', currentIndex);
+
+      card.innerHTML = `
+  <div class="image-wrapper">
+    ${food.tag ? `<span class="tag">${food.tag}</span>` : ""}
+    <img src="${food.image}">
+  </div>
+
+  <div class="food-details">
+    <h3>${food.name}</h3>
+
+    <div class="info-row">
+      <span class="rating">⭐ ${food.rating}</span>
+      <span class="time">⏱ ${food.time}</span>
+    </div>
+
+    <div class="price">₹${food.price}</div>
+
+    <button class="add-btn magnetic"
+      onclick="addToCart('${food.name}',${food.price})">
+      Add to Cart
+    </button>
+  </div>
+`;
+
+      row.appendChild(card);
+      currentIndex++;
+    }
+
+    container.appendChild(row);
+  });
+}
+
+function addToCart(name,price){
+  cart.push({name,price});
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  showToast(name + " added to cart 🛒");
+}
+
+function updateCartCount(){
+  document.getElementById("cart-count").innerText = cart.length;
+}
+
+function goToCart(){
+  window.location="cart.html";
+}
+
+function filterFood(){
+  const search = document.getElementById("search").value.toLowerCase();
+  const filtered = foods.filter(food =>
+    food.name.toLowerCase().includes(search)
+  );
+  loadFoods(filtered);
+}
+
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.innerText = message;
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },2000);
+}
+if(!selectedHotel){
+  document.querySelector(".section-title").innerText = "All Restaurants - Menu";
+}
+const textArray = [
+  "Search Idli...",
+  "Search Biryani...",
+  "Search Pizza...",
+  "Search Shawarma..."
+];
+
+let typingIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const searchInput = document.getElementById("search");
+
+function typeEffect() {
+  const currentText = textArray[typingIndex];
+
+  if (!isDeleting) {
+    searchInput.placeholder = currentText.substring(0, charIndex++);
+    if (charIndex > currentText.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1000);
+      return;
+    }
+  } else {
+    searchInput.placeholder = currentText.substring(0, charIndex--);
+    if (charIndex === 0) {
+      isDeleting = false;
+      typingIndex = (typingIndex + 1) % textArray.length;
+    }
+  }
+  setTimeout(typeEffect, isDeleting ? 50 : 100);
+}
+document.querySelectorAll(".food-card").forEach(card => {
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 10;
+    const rotateY = (x - centerX) / 10;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+
+});
+window.addEventListener("scroll", function(){
+  const offset = window.pageYOffset;
+  document.querySelector(".foods-bg")
+    .style.transform = "translateY(" + offset * 0.2 + "px)";
+});
+document.querySelectorAll(".magnetic").forEach(button => {
+  button.addEventListener("mousemove", function(e) {
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    button.style.transform = 
+      "translate(" + x * 0.2 + "px, " + y * 0.2 + "px)";
+  });
+
+  button.addEventListener("mouseleave", function() {
+    button.style.transform = "translate(0,0)";
+  });
+});
+document.querySelectorAll(".magnetic").forEach(button => {
+  button.addEventListener("mousemove", function(e) {
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    button.style.transform =
+      "translate(" + x * 0.2 + "px, " + y * 0.2 + "px)";
+  });
+
+  button.addEventListener("mouseleave", function() {
+    button.style.transform = "translate(0,0)";
+  });
+});
+document.querySelectorAll(".magnetic").forEach(button => {
+  button.addEventListener("mousemove", function(e) {
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    button.style.transform =
+      "translate(" + x * 0.2 + "px, " + y * 0.2 + "px)";
+  });
+
+  button.addEventListener("mouseleave", function() {
+    button.style.transform = "translate(0,0)";
+  });
+});
+typeEffect();
+
+// Load page
+loadFoods();
+setTimeout(() => {
+  document.querySelectorAll(".food-card").forEach(card => {
+
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = -(y - centerY) / 10;
+      const rotateY = (x - centerX) / 10;
+
+      card.style.transform =
+        `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform =
+        "rotateX(0) rotateY(0) scale(1)";
+    });
+
+  });
+}, 100);
+updateCartCount();
+</script>
+
+<div id="toast" class="toast"></div>
+<!-- ===== PREMIUM FOOTER ===== -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h2 class="footer-logo">🍔 QuickBite</h2>
+      <p>Delivering happiness to your doorstep 🚀</p>
+
+      <div class="social-icons">
+        <span>📘</span>
+        <span>📸</span>
+        <span>🐦</span>
+        <span>▶</span>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>Company</h3>
+      <p>About Us</p>
+      <p>Careers</p>
+      <p>Team</p>
+      <p>Blog</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Support</h3>
+      <p>Help Center</p>
+      <p>Contact Us</p>
+      <p>Partner With Us</p>
+      <p>FAQs</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Download App</h3>
+      <button class="app-btn">📱 App Store</button>
+      <button class="app-btn">🤖 Google Play</button>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 QuickBite Pvt Ltd | Made with ❤️ in India</p>
+  </div>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+<style>
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:sans-serif;
+  background:linear-gradient(135deg,#ff5200,#ff7a18);
+}
+.box{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+}
+input{
+  padding:10px;
+  margin:10px 0;
+  width:200px;
+}
+button{
+  padding:10px 20px;
+  background:#ff5200;
+  color:white;
+  border:none;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Admin Login</h2>
+<input type="password" id="adminPass" placeholder="Enter Password">
+<br>
+<button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+  const pass = document.getElementById("adminPass").value;
+
+  if(pass === "admin123"){  // change password here
+    localStorage.setItem("isAdmin","true");
+    window.location.href="admin.html";
+  }else{
+    alert("Wrong password!");
+  }
+}
+</script>
+
+</body>
+</html>

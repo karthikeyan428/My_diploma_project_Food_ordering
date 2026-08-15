@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>QuickBite - Admin God Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff5200,#ff7a18);
+  color:#333;
+}
+
+header{
+  padding:25px;
+  text-align:center;
+  color:white;
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.dashboard-container{
+  max-width:1300px;
+  margin:30px auto;
+  padding:20px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+  gap:40px;
+  margin-bottom:60px;
+}
+
+.stat-card{
+  padding:60px 40px;
+  border-radius:30px;
+  text-align:center;
+  color:white;
+  transition:0.4s;
+  box-shadow:0 25px 60px rgba(0,0,0,0.25);
+  position:relative;
+  overflow:hidden;
+}
+
+.stat-card h3{
+  font-size:65px;
+  margin:20px 0;
+  font-weight:700;
+}
+
+.stat-card p{
+  font-size:22px;
+  opacity:0.95;
+}
+
+.stat-card small{
+  display:block;
+  margin-top:12px;
+  font-size:17px;
+  opacity:0.9;
+}
+
+.stat-card:hover{
+  transform:translateY(-12px) scale(1.04);
+}
+
+/* BOX COLORS */
+.orders-box{
+  background:linear-gradient(135deg,#ff5200,#ff7a18);
+  box-shadow:0 20px 50px rgba(255,82,0,0.4);
+}
+
+.revenue-box{
+  background:linear-gradient(135deg,#00c853,#28a745);
+  box-shadow:0 20px 50px rgba(40,167,69,0.5);
+}
+
+.rating-box{
+  background:linear-gradient(135deg,#2962ff,#448aff);
+  box-shadow:0 20px 50px rgba(41,98,255,0.5);
+}
+
+.stat-card:hover{
+  transform:translateY(-12px) scale(1.05);
+}
+
+/* Different Colors */
+.orders-box{
+  background:linear-gradient(135deg,#ff7a18,#ff5200);
+  box-shadow:0 15px 40px rgba(255,82,0,0.4);
+}
+
+.revenue-box{
+  background:linear-gradient(135deg,#00c853,#28a745);
+  box-shadow:0 15px 40px rgba(40,167,69,0.4);
+}
+
+.rating-box{
+  background:linear-gradient(135deg,#2962ff,#448aff);
+  box-shadow:0 15px 40px rgba(41,98,255,0.4);
+}
+
+.stat-card:hover{
+  transform:translateY(-10px) scale(1.03);
+}
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom:40px;
+}
+
+th, td{
+  padding:14px;
+  border-bottom:1px solid #eee;
+}
+
+th{
+  background:#ff5200;
+  color:white;
+}
+
+tr:hover{
+  background:#fff4ec;
+}
+
+button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  color:white;
+}
+
+.view-btn{background:#28a745;}
+.delete-btn{background:#dc3545;}
+
+/* FEEDBACK SECTION */
+.feedback-section{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.feedback-card{
+  border-bottom:1px solid #eee;
+  padding:12px 0;
+}
+
+.stars{
+  color:gold;
+  font-size:18px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  width:90%;
+  max-width:600px;
+  animation:pop 0.4s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0.8);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+.close{
+  float:right;
+  font-size:22px;
+  cursor:pointer;
+}
+select{
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-weight:600;
+}
+canvas{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  margin-bottom:50px;
+}
+
+canvas{
+  background:rgba(255,255,255,0.95);
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.2);
+  margin-bottom:60px;
+}
+.status{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+  color:white;
+}
+
+.status.Pending{
+  background:#ff9800;
+}
+
+.status.Preparing{
+  background:#2196f3;
+}
+
+.status.OutforDelivery{
+  background:#9c27b0;
+}
+
+.status.Delivered{
+  background:#28a745;
+}
+
+.status-btn{
+  padding:5px 10px;
+  margin:2px;
+  border:none;
+  border-radius:6px;
+  font-size:12px;
+  cursor:pointer;
+  color:white;
+}
+
+.pending{background:#ff9800;}
+.preparing{background:#2196f3;}
+.delivery{background:#9c27b0;}
+.delivered{background:#28a745;}
+</style>
+</head>
+
+<body>
+  <div id="liveAlert" style="
+position:fixed;
+top:20px;
+right:20px;
+background:#28a745;
+color:white;
+padding:15px 25px;
+border-radius:10px;
+display:none;
+z-index:9999;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+">
+New Order Received!
+</div>
+
+<header>🚀 Admin Dashboard </header>
+
+<div class="dashboard-container">
+
+<div class="stats" id="stats"></div>
+
+<div id="ordersSection"></div>
+
+<div class="feedback-section">
+  <h2>⭐ User Feedback</h2>
+  <div id="feedbackList"></div>
+</div>
+
+</div>
+
+<!-- Order Modal -->
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Order Details</h3>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<canvas id="revenueChart" height="100"></canvas>
+<br><br>
+<canvas id="ratingChart" height="100"></canvas>
+<br><br>
+<button onclick="exportCSV()" style="padding:10px 20px;background:#ff5200;color:white;border:none;border-radius:8px;">
+📥 Export Orders CSV
+</button>
+<script>
+if(localStorage.getItem("isAdmin") !== "true"){
+  window.location.href="admin-login.html";
+}
+
+let history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+let revenueChartInstance;
+let ratingChartInstance;
+
+function renderDashboard(){
+
+  const totalRevenue = history.reduce((sum,o)=>sum + Number(o.total || 0), 0);
+
+  const avgRating = feedbacks.length
+    ? (feedbacks.reduce((sum,f)=>sum+f.rating,0)/feedbacks.length).toFixed(1)
+    : 0;
+
+  const today = new Date().toLocaleDateString();
+
+  const todayRevenue = history
+    .filter(o=> new Date(o.date).toLocaleDateString() === today)
+    .reduce((sum,o)=> sum + Number(o.total||0),0);
+
+  const yesterdayDate = new Date();
+  yesterdayDate.setDate(yesterdayDate.getDate()-1);
+  const yesterday = yesterdayDate.toLocaleDateString();
+
+  const yesterdayRevenue = history
+    .filter(o=> new Date(o.date).toLocaleDateString() === yesterday)
+    .reduce((sum,o)=> sum + Number(o.total||0),0);
+
+  const growth = yesterdayRevenue > 0
+  ? (((todayRevenue - yesterdayRevenue) / yesterdayRevenue) * 100).toFixed(1)
+  : (todayRevenue > 0 ? 100 : 0);
+
+  document.getElementById("stats").innerHTML = `
+    <div class="stat-card orders-box">
+      <p>📦 Total Orders</p>
+      <h3>${history.length}</h3>
+      <small>All Time Orders</small>
+    </div>
+
+    <div class="stat-card revenue-box">
+      <p>💰 Total Revenue</p>
+      <h3>₹${totalRevenue.toLocaleString()}</h3>
+      <small>
+        🟢 Today: ₹${todayRevenue.toLocaleString()} <br>
+        📈 Growth: ${growth}%
+      </small>
+    </div>
+
+    <div class="stat-card rating-box">
+      <p>⭐ Average Rating</p>
+      <h3>${avgRating}</h3>
+      <small>${feedbacks.length} Reviews Collected</small>
+    </div>
+  `;
+
+  renderOrders();
+  renderFeedback();
+  renderCharts();
+}
+
+
+function renderOrders(){
+
+ let html = `
+<h2>🛒 Orders</h2>
+<table>
+<tr>
+<th>#</th>
+<th>Order ID</th>
+<th>Total</th>
+<th>Status</th>
+<th>Update</th>
+<th>Actions</th>
+</tr>
+`;
+
+  history.forEach((o,i)=>{
+
+    html += `
+      <tr>
+        <td>${i+1}</td>
+        <td>${o.id || "N/A"}</td>
+        <td>₹${o.total || 0}</td>
+        <td>
+          <span class="status ${o.status?.replace(/\s/g,'')}">${o.status || "Pending"}</span>
+        </td>
+
+        <td>
+         <button class="status-btn pending" onclick="updateStatus(${i},'Pending')">Pending</button>
+         <button class="status-btn preparing" onclick="updateStatus(${i},'Preparing')">Preparing</button>
+         <button class="status-btn delivery" onclick="updateStatus(${i},'Out for Delivery')">Out</button>
+         <button class="status-btn delivered" onclick="updateStatus(${i},'Delivered')">Done</button>
+       </td>
+        <td>
+          <button class="view-btn" onclick="viewOrder(${i})">View</button>
+          <button class="delete-btn" onclick="deleteOrder(${i})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += "</table>";
+  document.getElementById("ordersSection").innerHTML = html;
+}
+
+function renderFeedback(){
+  let container = document.getElementById("feedbackList");
+
+  if(feedbacks.length===0){
+    container.innerHTML="<p>No feedback yet.</p>";
+    return;
+  }
+
+  container.innerHTML="";
+  feedbacks.forEach((f,i)=>{
+    let stars = "★".repeat(f.rating) + "☆".repeat(5-f.rating);
+    container.innerHTML+=`
+      <div class="feedback-card">
+        <div class="stars">${stars}</div>
+        <p><strong>Mood:</strong> ${f.mood||"-"}</p>
+        <p>${f.comment||""}</p>
+        <button class="delete-btn" onclick="deleteFeedback(${i})">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function viewOrder(i){
+  let o = history[i];
+  let items = o.items?.map(it=>`${it.name} x${it.quantity}`).join("<br>") || "No items";
+
+  document.getElementById("modalContent").innerHTML=`
+    <p><strong>Order ID:</strong> ${o.id||"N/A"}</p>
+    <p><strong>Total:</strong> ₹${o.total||0}</p>
+    <p><strong>Payment:</strong> ${o.payment||"-"}</p>
+    <p><strong>Date:</strong> ${o.date||"-"}</p>
+    <p><strong>Items:</strong><br>${items}</p>
+  `;
+
+  document.getElementById("orderModal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("orderModal").style.display="none";
+}
+
+function deleteOrder(i){
+  if(confirm("Delete this order?")){
+    history.splice(i,1);
+    localStorage.setItem("orderHistory",JSON.stringify(history));
+    renderDashboard();
+  }
+}
+
+function deleteFeedback(i){
+  if(confirm("Delete this feedback?")){
+    feedbacks.splice(i,1);
+    localStorage.setItem("feedbacks",JSON.stringify(feedbacks));
+    renderDashboard();
+  }
+}
+
+window.onclick=function(e){
+  if(e.target.id==="orderModal"){
+    closeModal();
+  }
+}
+
+function renderCharts(){
+
+  if(typeof Chart === "undefined") return;
+
+  if(revenueChartInstance) revenueChartInstance.destroy();
+  if(ratingChartInstance) ratingChartInstance.destroy();
+
+  let revenueMap = {};
+
+  history.forEach(order=>{
+    let date = order.date
+      ? new Date(order.date).toLocaleDateString()
+      : "Unknown";
+
+    revenueMap[date] = (revenueMap[date] || 0) + Number(order.total || 0);
+  });
+
+  const ctx1 = document.getElementById("revenueChart").getContext("2d");
+
+  revenueChartInstance = new Chart(ctx1,{
+    type:"line",
+    data:{
+      labels:Object.keys(revenueMap),
+      datasets:[{
+        label:"Revenue ₹",
+        data:Object.values(revenueMap),
+        borderColor:"#ff5200",
+        backgroundColor:"rgba(255,82,0,0.15)",
+        borderWidth:3,
+        pointBackgroundColor:"#ff5200",
+        pointRadius:6,
+        fill:true,
+        tension:0.4
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{
+          labels:{
+            font:{size:14,weight:'bold'}
+          }
+        }
+      },
+      scales:{
+        x:{
+          grid:{display:false}
+        },
+        y:{
+          grid:{
+            color:"rgba(0,0,0,0.05)"
+          }
+        }
+      }
+    }
+  });
+
+  // Rating Chart
+  let ratingCount = [0,0,0,0,0];
+
+  feedbacks.forEach(f=>{
+    if(f.rating>=1 && f.rating<=5){
+      ratingCount[f.rating-1]++;
+    }
+  });
+
+  const ctx2 = document.getElementById("ratingChart").getContext("2d");
+
+  ratingChartInstance = new Chart(ctx2,{
+    type:"bar",
+    data:{
+      labels:["1⭐","2⭐","3⭐","4⭐","5⭐"],
+      datasets:[{
+        label:"Ratings",
+        data:ratingCount,
+        backgroundColor:[
+          "#ff4d4d",
+          "#ff944d",
+          "#ffd11a",
+          "#66cc66",
+          "#00c853"
+        ],
+        borderRadius:10
+      }]
+    },
+    options:{
+      plugins:{
+        legend:{
+          labels:{
+            font:{size:14,weight:'bold'}
+          }
+        }
+      },
+      scales:{
+        y:{
+          beginAtZero:true,
+          grid:{color:"rgba(0,0,0,0.05)"}
+        },
+        x:{
+          grid:{display:false}
+        }
+      }
+    }
+  });
+}
+
+function exportCSV(){
+  if(history.length === 0){
+    alert("No orders to export");
+    return;
+  }
+
+  let csv = "OrderID,Total,Payment,Date\n";
+
+  history.forEach(o=>{
+    csv += `${o.id||""},${o.total||0},${o.payment||""},${o.date||""}\n`;
+  });
+
+  const blob = new Blob([csv],{type:"text/csv"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "orders.csv";
+  a.click();
+}
+function updateStatus(index, newStatus){
+  history[index].status = newStatus;
+  localStorage.setItem("orderHistory", JSON.stringify(history));
+  renderDashboard();
+}
+let lastOrderCount = history.length;
+
+setInterval(()=>{
+  let updatedHistory = JSON.parse(localStorage.getItem("orderHistory")) || [];
+
+  if(updatedHistory.length > lastOrderCount){
+    document.getElementById("liveAlert").style.display="block";
+
+    setTimeout(()=>{
+      document.getElementById("liveAlert").style.display="none";
+    },3000);
+
+    lastOrderCount = updatedHistory.length;
+    history = updatedHistory;
+    renderDashboard();
+  }
+
+},2000);
+function autoUpdateOrderStatus(){
+
+  const now = new Date();
+
+  history.forEach(order => {
+
+    if(!order.date) return;
+
+    const orderTime = new Date(order.date);
+    const diffMinutes = (now - orderTime) / (1000 * 60);
+
+    if(diffMinutes >= 20){
+      order.status = "Delivered";
+    }
+    else if(diffMinutes >= 15){
+      order.status = "Out for Delivery";
+    }
+    else if(diffMinutes >= 10){
+      order.status = "Preparing";
+    }
+    else{
+      order.status = "Pending";
+    }
+
+  });
+
+  localStorage.setItem("orderHistory", JSON.stringify(history));
+}
+function autoUpdateOrderStatus(){
+
+  const now = new Date();
+
+  history.forEach(order => {
+
+    if(!order.date) return;
+
+    const orderTime = new Date(order.date);
+    const diffMinutes = (now - orderTime) / (1000 * 60);
+
+    if(diffMinutes >= 20){
+      order.status = "Delivered";
+    }
+    else if(diffMinutes >= 15){
+      order.status = "Out for Delivery";
+    }
+    else if(diffMinutes >= 10){
+      order.status = "Preparing";
+    }
+    else{
+      order.status = "Pending";
+    }
+
+  });
+
+  localStorage.setItem("orderHistory", JSON.stringify(history));
+}
+
+// 🔥 ADD THIS
+autoUpdateOrderStatus();
+
+// 🔥 ADD THIS
+setInterval(()=>{
+  autoUpdateOrderStatus();
+  renderDashboard();
+}, 60000);
+
+renderDashboard();
+autoUpdateOrderStatus();
+// Run every 1 minute
+setInterval(()=>{
+  autoUpdateOrderStatus();
+  renderDashboard();
+}, 60000);
+</script>
+
+</body>
+</html>

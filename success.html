@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Success</title>
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      font-family: Arial, sans-serif;
+      overflow:hidden;
+      background: linear-gradient(-45deg,#fc8019,#ff3c00,#ff6a00,#ff914d);
+      background-size:400% 400%;
+      animation: gradientMove 10s ease infinite;
+      color:white;
+    }
+
+    @keyframes gradientMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    .circle{
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      animation: pop 0.6s ease forwards;
+      box-shadow:0 0 40px rgba(255,255,255,0.8);
+      z-index:2;
+    }
+
+    .tick{
+      font-size:70px;
+      color:#28a745;
+      animation: tick 0.5s 0.6s ease forwards, glow 1.5s infinite;
+      opacity:0;
+    }
+
+    h1{
+      margin-top:25px;
+      animation: fade 1s 1s forwards;
+      opacity:0;
+      z-index:2;
+    }
+
+    p{
+      animation: fade 1s 1.5s forwards;
+      opacity:0;
+      z-index:2;
+    }
+
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    @keyframes pop{
+      0%{transform:scale(0);}
+      100%{transform:scale(1);}
+    }
+
+    @keyframes tick{
+      0%{opacity:0; transform:scale(0);}
+      100%{opacity:1; transform:scale(1);}
+    }
+
+    @keyframes fade{
+      to{opacity:1;}
+    }
+
+    @keyframes glow{
+      0%{text-shadow:0 0 5px #28a745;}
+      50%{text-shadow:0 0 20px #28a745;}
+      100%{text-shadow:0 0 5px #28a745;}
+    }
+
+
+/* Extra dramatic glow */
+.circle{
+  animation: pop 0.6s ease forwards, dramaticGlow 2s infinite alternate;
+}
+
+@keyframes dramaticGlow{
+  0%{ box-shadow:0 0 20px rgba(255,255,255,0.6); }
+  100%{ box-shadow:0 0 60px rgba(255,255,255,1); }
+}
+/* ===============================
+   🏍 REAL SPORT BIKE DESIGN
+================================ */
+
+.bike{
+  position:absolute;
+  bottom:10px;
+  left:0;
+  width:320px;
+  height:140px;
+  animation: ride 4s linear forwards,
+             engineShake 0.08s infinite alternate;
+}
+
+/* Wheels */
+.wheel{
+  position:absolute;
+  width:60px;
+  height:60px;
+  border:8px solid #111;
+  border-radius:50%;
+  bottom:0;
+  background: radial-gradient(circle,#999 30%,#333 70%);
+  animation: spin 0.3s linear infinite;
+}
+
+.back{ left:40px; }
+.front{ right:40px; }
+
+@keyframes spin{
+  100%{ transform:rotate(360deg); }
+}
+
+/* Fuel Tank */
+.fuel-tank{
+  position:absolute;
+  bottom:65px;
+  left:120px;
+  width:80px;
+  height:35px;
+  background:#ff3c00;
+  border-radius:40px 40px 20px 20px;
+  box-shadow:0 0 15px rgba(255,60,0,0.7);
+}
+
+/* Seat */
+.seat{
+  position:absolute;
+  bottom:75px;
+  left:180px;
+  width:60px;
+  height:15px;
+  background:#111;
+  border-radius:10px;
+}
+
+/* Front Fork */
+.front-fork{
+  position:absolute;
+  bottom:40px;
+  right:90px;
+  width:6px;
+  height:55px;
+  background:#444;
+  transform:rotate(15deg);
+}
+
+/* Engine */
+.engine{
+  position:absolute;
+  bottom:45px;
+  left:140px;
+  width:45px;
+  height:35px;
+  background:#555;
+  border-radius:8px;
+}
+
+/* Chain Section */
+.chain{
+  position:absolute;
+  bottom:40px;
+  left:95px;
+  width:50px;
+  height:6px;
+  background:#222;
+}
+
+/* Exhaust */
+.exhaust{
+  position:absolute;
+  bottom:35px;
+  left:60px;
+  width:40px;
+  height:10px;
+  background:#333;
+  border-radius:10px;
+}
+
+/* ===============================
+   📦 DELIVERY BOX WITH LOGO
+================================ */
+
+.box{
+  position:absolute;
+  bottom:78px;
+  left:230px;
+  width:65px;
+  height:55px;
+  background:#ff0000;
+  border-radius:6px;
+  box-shadow:0 0 25px rgba(255,0,0,0.8);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-weight:bold;
+  font-size:9px;
+  text-align:center;
+}
+
+/* Burger Icon */
+.box-logo{
+  font-size:16px;
+  line-height:16px;
+}
+
+/* QuickBite Text */
+.box-text{
+  font-size:8px;
+  letter-spacing:0.5px;
+}
+
+/* Box Lid Line */
+.box::before{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:0;
+  width:100%;
+  height:4px;
+  background:#cc0000;
+}
+
+/* Mount Rack Under Box */
+.box::after{
+  content:"";
+  position:absolute;
+  bottom:-8px;
+  left:-20px;
+  width:90px;
+  height:6px;
+  background:#222;
+  border-radius:4px;
+}
+
+/* Rider */
+.rider-head{
+  position:absolute;
+  bottom:110px;
+  left:165px;
+  width:28px;
+  height:28px;
+  background:#000;
+  border-radius:50%;
+}
+
+.rider-body{
+  position:absolute;
+  bottom:75px;
+  left:170px;
+  width:18px;
+  height:45px;
+  background:#000;
+  border-radius:10px;
+}
+
+/* Headlight */
+.headlight{
+  position:absolute;
+  bottom:65px;
+  right:75px;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 20px #fff,0 0 40px #ffffcc;
+}
+
+/* Light Beam */
+.beam{
+  position:absolute;
+  bottom:45px;
+  right:-220px;
+  width:240px;
+  height:90px;
+  background:linear-gradient(to right,
+    rgba(255,255,200,0.6),
+    rgba(255,255,200,0));
+  clip-path:polygon(0 40%,100% 0,100% 100%);
+}
+
+/* Engine Shake */
+@keyframes engineShake{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-2px); }
+}
+
+/* ===============================
+   💨 EXHAUST SMOKE EFFECT
+================================ */
+
+.smoke-container{
+  position:absolute;
+  bottom:35px;
+  left:50px;
+}
+
+.smoke{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:rgba(255,255,255,0.7);
+  border-radius:50%;
+  animation: smokeUp 2s linear forwards;
+}
+
+@keyframes smokeUp{
+  0%{
+    transform:translate(0,0) scale(1);
+    opacity:0.8;
+  }
+  100%{
+    transform:translate(-40px,-60px) scale(2);
+    opacity:0;
+  }
+}
+/* ===============================
+   🌙 NIGHT HEADLIGHT SYSTEM
+================================ */
+
+.headlight{
+  position:absolute;
+  bottom:48px;
+  right:10px;
+  width:12px;
+  height:12px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 20px #fff, 0 0 40px #fffbcc;
+  z-index:5;
+}
+
+.beam{
+  position:absolute;
+  bottom:35px;
+  right:-180px;
+  width:200px;
+  height:80px;
+  background:linear-gradient(to right,
+    rgba(255,255,200,0.6),
+    rgba(255,255,200,0));
+  clip-path:polygon(0 40%,100% 0,100% 100%);
+  animation: beamFlicker 1s infinite alternate;
+}
+
+@keyframes beamFlicker{
+  from{opacity:0.8;}
+  to{opacity:1;}
+}
+
+/* ===============================
+   🛣 ROAD SPEED MOTION LINES
+================================ */
+
+.speed-lines{
+  position:absolute;
+  bottom:15px;
+  left:-200px;
+  width:400px;
+  height:5px;
+  background:repeating-linear-gradient(
+    to right,
+    rgba(255,255,255,0.7) 0 20px,
+    transparent 20px 40px
+  );
+  animation: roadMove 0.4s linear infinite;
+}
+
+@keyframes roadMove{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(40px); }
+}
+
+/* ===============================
+   🚀 TURBO BOOST MODE
+================================ */
+
+.bike.turbo{
+  animation: rideTurbo 2s ease-in-out forwards;
+}
+
+@keyframes rideTurbo{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(140vw); }
+}
+
+.bike.turbo .box{
+  box-shadow:0 0 50px #ff0000,0 0 80px orange;
+}
+
+/* Turbo Flame */
+.turbo-flame{
+  position:absolute;
+  bottom:32px;
+  left:35px;
+  width:20px;
+  height:10px;
+  background:linear-gradient(to left,orange,red,yellow);
+  border-radius:50%;
+  animation: flame 0.2s infinite alternate;
+}
+
+@keyframes flame{
+  from{ transform:scaleX(1); opacity:0.8;}
+  to{ transform:scaleX(1.5); opacity:1;}
+}
+
+/* ===============================
+   🔧 ENGINE VIBRATION
+================================ */
+
+.bike{
+  animation: ride 4s ease-in-out forwards,
+             engineShake 0.1s infinite alternate;
+}
+
+@keyframes engineShake{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-2px); }
+}
+
+.rear-support{
+  position:absolute;
+  bottom:60px;
+  left:210px;
+  width:6px;
+  height:40px;
+  background:#444;
+}
+/* ===============================
+   🔶 QUICKBITE TEXT LOGO
+================================ */
+
+.logo{
+  position:absolute;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#ff7a00;
+  padding:10px 25px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:28px;
+  font-weight:bold;
+  color:white;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  z-index:10;
+  animation: logoAppear 1s ease forwards;
+  opacity:0;
+}
+
+.burger{
+  font-size:30px;
+}
+
+.brand{
+  letter-spacing:1px;
+}
+
+@keyframes logoAppear{
+  to{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+}
+  </style>
+</head>
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="circle">
+  <div class="tick">✓</div>
+</div>
+
+<h1>Order Placed Successfully! 🎉</h1>
+<p>Thank you for your order ❤️</p>
+
+<!-- 🚴 Delivery Bike Animation -->
+<div class="delivery-container">
+  <div class="road"></div>
+
+  <div class="bike">
+
+    <!-- Smoke -->
+    <div class="smoke-container"></div>
+
+    <!-- Wheels -->
+    <div class="wheel back"></div>
+    <div class="wheel front"></div>
+
+    <!-- Bike Structure -->
+    <div class="fuel-tank"></div>
+    <div class="seat"></div>
+    <div class="front-fork"></div>
+    <div class="engine"></div>
+    <div class="chain"></div>
+    <div class="exhaust"></div>
+
+    <!-- Headlight -->
+    <div class="headlight"></div>
+    <div class="beam"></div>
+
+    <!-- Delivery Box -->
+    <div class="box">
+   <span class="box-logo">🍔</span>
+   <span class="box-text">QuickBite</span>
+   </div>
+
+    <!-- Rider -->
+    <div class="rider-head"></div>
+    <div class="rider-body"></div>
+    <div class="rear-support"></div>
+
+</div>
+
+<script>
+/* 🎆 FIREWORKS ENGINE */
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function createFirework(){
+  const x = Math.random()*canvas.width;
+  const y = Math.random()*canvas.height/2;
+
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:x,
+      y:y,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*6+2,
+      alpha:1,
+      color:`hsl(${Math.random()*360},100%,50%)`
+    });
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach((p,index)=>{
+    p.x += Math.cos(p.angle)*p.speed;
+    p.y += Math.sin(p.angle)*p.speed;
+    p.alpha -= 0.015;
+
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,3,0,Math.PI*2);
+    ctx.fill();
+
+    if(p.alpha <= 0){
+      particles.splice(index,1);
+    }
+  });
+
+  requestAnimationFrame(animate);
+}
+
+setInterval(createFirework,800);
+animate();
+
+/* 🎊 CONFETTI BURST */
+for(let i=0;i<50;i++){
+  const confetti = document.createElement("div");
+  confetti.style.position="fixed";
+  confetti.style.width="8px";
+  confetti.style.height="8px";
+  confetti.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  confetti.style.top="-10px";
+  confetti.style.left=Math.random()*window.innerWidth+"px";
+  confetti.style.opacity="0.8";
+  confetti.style.zIndex="1";
+  confetti.style.borderRadius="2px";
+  confetti.style.animation=`fall ${Math.random()*3+2}s linear forwards`;
+
+  document.body.appendChild(confetti);
+
+  const style=document.createElement("style");
+  style.innerHTML=`
+    @keyframes fall{
+      to{
+        transform:translateY(${window.innerHeight}px) rotate(720deg);
+        opacity:0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+/* ⏳ REDIRECT TO FEEDBACK */
+setTimeout(function(){
+  window.location.href = "feedback.html";
+},5000);
+// 💨 Continuous Smoke Generator
+setInterval(()=>{
+  const smoke = document.createElement("div");
+  smoke.classList.add("smoke");
+
+  document.querySelector(".smoke-container").appendChild(smoke);
+
+  setTimeout(()=>{
+    smoke.remove();
+  },2000);
+
+},200);
+// 🚀 Activate Turbo After 2 Seconds
+setTimeout(()=>{
+  const bike = document.querySelector(".bike");
+  bike.classList.add("turbo");
+
+  const flame = document.createElement("div");
+  flame.classList.add("turbo-flame");
+  bike.appendChild(flame);
+
+},2000);
+
+</script>
+
+</body>
+</html>
